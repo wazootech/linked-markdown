@@ -51,7 +51,7 @@ author-intent semantics.
 
 LMP takes a different approach: **frontmatter is JSON-LD**. The protocol
 requires no custom syntax, no new file extension, and no special renderer.
-A single `id` and `@type` field in the frontmatter turns any Markdown
+A single `@id` and `@type` field in the frontmatter turns any Markdown
 document into a typed RDF node. From this foundation, LMP layers
 validation (SHACL), inference (OWL-RL), query (SPARQL), and publishing ---
 each capability independently adoptable by conforming processors.
@@ -85,8 +85,9 @@ This file is valid Markdown, valid YAML, and valid JSON-LD simultaneously.
 
 ## Document Model
 
-Every LMP document is identified by a canonical IRI (`id` or `@id`) and
-one or more RDF types (`@type` or `type`). Frontmatter fields map directly
+Every LMP document is identified by a canonical IRI (`@id`) and
+one or more RDF types (`@type`). The bare `id` and `type` aliases
+are also valid in YAML frontmatter. Frontmatter fields map directly
 to RDF predicate-value pairs with the document's `id` as subject. The
 Markdown body (everything after the frontmatter) is addressable as an RDF
 literal, typically via `schema:articleBody`.
@@ -169,7 +170,7 @@ tool (`github.com/wazootech/wiki`, package `wazootech-wiki`).
 The wiki CLI implements:
 
 - **LMP-Core**: Parsing LMP documents from a filesystem corpus, resolving
-  `id` and `@type`, producing an RDF 1.1 graph using `rdflib`.
+  `@id` and `@type`, producing an RDF 1.1 graph using `rdflib`.
 - **LMP-Validation**: SHACL validation against shapes in a `shapes/`
   directory, using `pyshacl`.
 - **LMP-Query**: SPARQL 1.1 query execution via `rdflib`-embedded
@@ -205,7 +206,7 @@ and conservative in what it produces (valid RDF).
 
 ## Adoption Path
 
-LMP is incrementally adoptable. A single file with an `id` and `@type`
+LMP is incrementally adoptable. A single file with an `@id` and `@type`
 in its frontmatter is a valid LMP document. Adding a shapes file enables
 validation. Adding a SPARQL query enables query. Adding a publish
 configuration enables HTML output. Each capability can be adopted
