@@ -33,6 +33,17 @@ jobs:
               -o "$dir/$base.html"
           done
 
+          # Inject shared styles after pandoc's default CSS
+          echo '<style>' > _style.html
+          cat style.css >> _style.html
+          echo '</style>' >> _style.html
+          for html in $(find . -name '*.html'); do
+            sed -i '/<\/style>/{
+              r _style.html
+            }' "$html"
+          done
+          rm _style.html
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./
