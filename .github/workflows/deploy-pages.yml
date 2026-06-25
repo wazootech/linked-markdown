@@ -24,13 +24,14 @@ jobs:
 
       - name: Build HTML pages
         run: |
-          pandoc index.md -f markdown -t html -s \
-            --metadata title="Linked Markdown Protocol" \
-            -o index.html
-
-          pandoc spec/index.md -f markdown -t html -s \
-            --metadata title="Linked Markdown Protocol" \
-            -o spec/index.html
+          for f in $(find . -name '*.md' -not -path './.github/*' -not -path './.git/*'); do
+            dir=$(dirname "$f")
+            base=$(basename "$f" .md)
+            mkdir -p "$dir"
+            pandoc "$f" -f markdown -t html -s \
+              --metadata title="Linked Markdown Protocol" \
+              -o "$dir/$base.html"
+          done
 
       - uses: actions/upload-pages-artifact@v3
         with:
