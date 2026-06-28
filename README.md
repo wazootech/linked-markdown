@@ -1,4 +1,4 @@
-# Linked Markdown Protocol (LMP)
+# Linked Markdown
 
 A specification for structuring, validating, and querying typed Markdown documents as first-class semantic graph nodes.
 
