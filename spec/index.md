@@ -1,14 +1,14 @@
 ---
 id: https://wazootech.github.io/linked-markdown/spec/
-"@type": lmp:Specification
-lmp:version: 0.1.0
-lmp:status: Draft
-lmp:published: 2026-06-23
-lmp:license: MIT
-lmp:repository: https://github.com/wazootech/linked-markdown
-lmp:supersedes: https://wazootech.github.io/wiki/
+"@type": lmd:Specification
+lmd:version: 0.1.0
+lmd:status: Draft
+lmd:published: 2026-06-23
+lmd:license: MIT
+lmd:repository: https://github.com/wazootech/linked-markdown
+lmd:supersedes: https://wazootech.github.io/wiki/
 "@context":
-  lmp: https://wazootech.github.io/linked-markdown/ns#
+  lmd: https://wazootech.github.io/linked-markdown/ns#
   schema: https://schema.org/
   dcterms: http://purl.org/dc/terms/
   xsd: http://www.w3.org/2001/XMLSchema#
@@ -19,7 +19,7 @@ lmp:supersedes: https://wazootech.github.io/wiki/
   rdfs: http://www.w3.org/2000/01/rdf-schema#
 ---
 
-# Linked Markdown Protocol (LMP)
+# Linked Markdown (LMD)
 
 **Specification Version 0.1.0 — Draft**
 
@@ -37,24 +37,24 @@ This document is governed by the [W3C Community Contributor License Agreement (C
 
 ## 1. Introduction
 
-The Linked Markdown Protocol (LMP) is a specification for structuring, validating, and querying typed Markdown documents as first-class semantic graph nodes.
+Linked Markdown (LMD) is a specification for structuring, validating, and querying typed Markdown documents as first-class semantic graph nodes.
 
-LMP defines a protocol over standard `.md` files. An LMP document is simultaneously:
+LMD defines a protocol over standard `.md` files. An LMD document is simultaneously:
 
 - **Valid Markdown** — renderable by any CommonMark-compliant renderer, including GitHub, Obsidian, VS Code, and Pandoc.
 - **Valid JSON-LD** — frontmatter is a valid JSON-LD node, loadable by any RDF toolchain including `rdflib`, Apache Jena, and Oxigraph.
-- **Incrementally adoptable** — a single file with a `type` field and an `id` field is an LMP document. The protocol adds capability without breaking existing workflows.
+- **Incrementally adoptable** — a single file with a `type` field and an `id` field is an LMD document. The protocol adds capability without breaking existing workflows.
 
 No custom syntax is introduced. No new file extension is required. The protocol lives entirely in the frontmatter, the linking conventions, and the validation shapes applied by conforming processors.
 
-LMP is the Worlds-aligned specification for defining item types, shapes, and orchestrating world memory within the Wazoo Worlds paradigm. It is the formalization of the design pattern described by DataBooks (Cagle, Shannon 2026) with the critical distinctions that LMP frontmatter is valid JSON-LD (not plain YAML) and LMP requires no inline annotation syntax.
+LMD is the Worlds-aligned specification for defining item types, shapes, and orchestrating world memory within the Wazoo Worlds paradigm. It is the formalization of the design pattern described by DataBooks (Cagle, Shannon 2026) with the critical distinctions that LMD frontmatter is valid JSON-LD (not plain YAML) and LMD requires no inline annotation syntax.
 
 ### 1.1. Design Goals
 
-1. **Zero custom syntax.** LMP adds no nonstandard Markdown syntax. All protocol semantics are expressed through standard JSON-LD frontmatter and standard Markdown links.
-2. **Valid by default.** A vanilla `.md` file with JSON-LD frontmatter is valid LMP. The protocol does not require any special Markdown dialect.
+1. **Zero custom syntax.** LMD adds no nonstandard Markdown syntax. All protocol semantics are expressed through standard JSON-LD frontmatter and standard Markdown links.
+2. **Valid by default.** A vanilla `.md` file with JSON-LD frontmatter is valid LMD. The protocol does not require any special Markdown dialect.
 3. **Layered capability.** A processor may validate, query, link-check, or publish — each capability is independent and optional at the processor level.
-4. **Standard RDF foundation.** LMP does not invent a new data model. It maps directly onto RDF 1.1, JSON-LD 1.1, SHACL, OWL-RL, and SPARQL 1.1.
+4. **Standard RDF foundation.** LMD does not invent a new data model. It maps directly onto RDF 1.1, JSON-LD 1.1, SHACL, OWL-RL, and SPARQL 1.1.
 5. **Deterministic structure.** Two conforming processors that validate the same corpus against the same shapes produce the same results.
 
 ### 1.2. Table of Contents
@@ -64,7 +64,7 @@ LMP is the Worlds-aligned specification for defining item types, shapes, and orc
   - [Prior Art and Related Work](#13-prior-art-and-related-work)
   - [Protocol Status and Versioning](#14-protocol-status-and-versioning)
 - [Conformance](#2-conformance)
-- [The LMP Document Model](#3-the-lmp-document-model)
+- [The LMD Document Model](#3-the-lmd-document-model)
 - [Frontmatter as JSON-LD](#4-frontmatter-as-json-ld)
 - [Document Linking](#5-document-linking)
 - [Validation](#6-validation)
@@ -78,10 +78,10 @@ LMP is the Worlds-aligned specification for defining item types, shapes, and orc
 
 ### 1.3. Prior Art and Related Work
 
-- **DataBooks (Cagle, Shannon, 2026)** — A design pattern for Markdown as semantic infrastructure. LMP adopts the DataBooks vision but diverges by requiring JSON-LD frontmatter (not YAML) and zero custom inline syntax.
-- **Markdown-LD (ozekik, 2023)** — A literate programming approach to embedding Turtle in Markdown body text using inline RDF syntax. Complementary to LMP; LMP addresses document-level typing and validation rather than inline triple annotation.
-- **MD-LD (davay42, 2026)** — A zero-dependency JavaScript library for inline RDF annotations in Markdown using `{=iri}` syntax. The nonstandard annotation syntax can cause unpredictable rendering. LMP avoids this entirely by restricting protocol semantics to frontmatter.
-- **json-ld-markdown (iunera, 2025)** — A transformer that infers Schema.org JSON-LD from plain Markdown structure (headings, tables, lists). Addresses a different concern (SEO/consumption-oriented inference vs. LMP's author-intent typing).
+- **DataBooks (Cagle, Shannon, 2026)** — A design pattern for Markdown as semantic infrastructure. LMD adopts the DataBooks vision but diverges by requiring JSON-LD frontmatter (not YAML) and zero custom inline syntax.
+- **Markdown-LD (ozekik, 2023)** — A literate programming approach to embedding Turtle in Markdown body text using inline RDF syntax. Complementary to LMD; LMD addresses document-level typing and validation rather than inline triple annotation.
+- **MD-LD (davay42, 2026)** — A zero-dependency JavaScript library for inline RDF annotations in Markdown using `{=iri}` syntax. The nonstandard annotation syntax can cause unpredictable rendering. LMD avoids this entirely by restricting protocol semantics to frontmatter.
+- **json-ld-markdown (iunera, 2025)** — A transformer that infers Schema.org JSON-LD from plain Markdown structure (headings, tables, lists). Addresses a different concern (SEO/consumption-oriented inference vs. LMD's author-intent typing).
 
 ### 1.4. Protocol Status and Versioning
 
@@ -91,7 +91,7 @@ This specification uses semantic versioning. Versions before 1.0.0 are drafts an
 
 ### 2.1. Document Conformance
 
-A document conforms to LMP if and only if:
+A document conforms to LMD if and only if:
 
 1. It is a syntactically valid Markdown document per the CommonMark specification.
 2. It contains exactly one JSON-LD frontmatter block delimited by `---` at the start of the file.
@@ -99,7 +99,7 @@ A document conforms to LMP if and only if:
 4. The frontmatter block includes an `id` field whose value is an absolute IRI.
 5. The frontmatter block includes a `@type` field (or the legacy `type` alias).
 
-The minimum viable LMP document:
+The minimum viable LMD document:
 
 ```markdown
 ---
@@ -113,28 +113,28 @@ id: https://example.org/docs/my-item
 Content here.
 ```
 
-A processor MUST NOT reject a conforming LMP document for lacking optional fields such as `@context`, `name`, or `description`.
+A processor MUST NOT reject a conforming LMD document for lacking optional fields such as `@context`, `name`, or `description`.
 
 ### 2.2. Processor Conformance
 
-A processor conforms to LMP if it implements at least one of the following capability tiers at the required conformance level:
+A processor conforms to LMD if it implements at least one of the following capability tiers at the required conformance level:
 
-- **LMP-Core** — Must parse frontmatter as JSON-LD, resolve `id` and `@type`, and produce an RDF 1.1 graph.
-- **LMP-Validation** — Must implement SHACL validation per [SHACL 1.1](https://www.w3.org/TR/shacl/).
-- **LMP-Query** — Must implement SPARQL 1.1 query execution against the LMP graph.
-- **LMP-Publish** — Must produce static HTML output consistent with the LMP document's semantic content.
+- **LMD-Core** — Must parse frontmatter as JSON-LD, resolve `id` and `@type`, and produce an RDF 1.1 graph.
+- **LMD-Validation** — Must implement SHACL validation per [SHACL 1.1](https://www.w3.org/TR/shacl/).
+- **LMD-Query** — Must implement SPARQL 1.1 query execution against the LMD graph.
+- **LMD-Publish** — Must produce static HTML output consistent with the LMD document's semantic content.
 
-Tier identifiers are used for capability discovery. A processor may advertise: `Conforms-To: LMP-Core, LMP-Validation`.
+Tier identifiers are used for capability discovery. A processor may advertise: `Conforms-To: LMD-Core, LMD-Validation`.
 
 ### 2.3. Shape Conformance
 
-A SHACL shapes graph conforms to LMP if it is valid SHACL per the W3C SHACL specification and targets at least one LMP document type via `sh:targetClass`.
+A SHACL shapes graph conforms to LMD if it is valid SHACL per the W3C SHACL specification and targets at least one LMD document type via `sh:targetClass`.
 
-## 3. The LMP Document Model
+## 3. The LMD Document Model
 
 ### 3.1. Document Identity
 
-Every LMP document has a canonical IRI in its `id` (or `@id`) field. This IRI is the document's identity within the LMP corpus and serves as the RDF subject for all triples generated from the document's frontmatter.
+Every LMD document has a canonical IRI in its `id` (or `@id`) field. This IRI is the document's identity within the LMD corpus and serves as the RDF subject for all triples generated from the document's frontmatter.
 
 The `id` SHOULD be a dereferenceable HTTP(S) IRI. The `id` MAY be a URN or tag URI for documents that are not publicly hosted.
 
@@ -144,12 +144,12 @@ id: https://example.org/docs/people/alice-smith
 
 ### 3.2. Document Type
 
-Every LMP document declares its semantic type via `@type` (or the legacy `type` alias). The value MUST be one or more IRI references, which may use CURIE notation when a `@context` is present.
+Every LMD document declares its semantic type via `@type` (or the legacy `type` alias). The value MUST be one or more IRI references, which may use CURIE notation when a `@context` is present.
 
 ```yaml
 @type:
   - schema:Person
-  - lmp:Document
+  - lmd:Document
 ```
 
 ### 3.3. The JSON-LD Context
@@ -161,25 +161,25 @@ The context MUST include at minimum:
 ```yaml
 @context:
   schema: https://schema.org/
-  lmp: https://wazootech.github.io/linked-markdown/ns#
+  lmd: https://wazootech.github.io/linked-markdown/ns#
 ```
 
-Processors SHOULD provide a default context that includes commonly used prefixes (`schema`, `lmp`, `rdf`, `rdfs`, `owl`, `sh`, `xsd`, `dc`, `dcterms`, `foaf`, `prov`). A document may override any default prefix.
+Processors SHOULD provide a default context that includes commonly used prefixes (`schema`, `lmd`, `rdf`, `rdfs`, `owl`, `sh`, `xsd`, `dc`, `dcterms`, `foaf`, `prov`). A document may override any default prefix.
 
 ### 3.4. Body Content
 
-The Markdown body text (everything after the frontmatter) is part of the LMP document and is addressable as an RDF literal via the configured content predicate. The default content predicate is `schema:articleBody`.
+The Markdown body text (everything after the frontmatter) is part of the LMD document and is addressable as an RDF literal via the configured content predicate. The default content predicate is `schema:articleBody`.
 
 A processor MAY include the body text as a literal triple in the document's RDF graph:
 ```
 <id> schema:articleBody "Body text here..." .
 ```
 
-A processor MUST NOT require body content. An LMP document may consist only of frontmatter.
+A processor MUST NOT require body content. An LMD document may consist only of frontmatter.
 
 ### 3.5. Links as Properties
 
-Standard Markdown links `[text](target)` in the body are interpreted as potential RDF object properties by a processor, but the protocol does not mandate automatic triple generation from arbitrary inline links. Only links whose semantic role is declared (via frontmatter, shape, or explicit convention such as `wikilinks` to other LMP documents) produce triples.
+Standard Markdown links `[text](target)` in the body are interpreted as potential RDF object properties by a processor, but the protocol does not mandate automatic triple generation from arbitrary inline links. Only links whose semantic role is declared (via frontmatter, shape, or explicit convention such as `wikilinks` to other LMD documents) produce triples.
 
 ## 4. Frontmatter as JSON-LD
 
@@ -227,7 +227,7 @@ name: Example Document
 | `name` | string | Human-readable title |
 | `description` | string | Short summary (aim for 200 chars or less) |
 
-A processor MUST NOT reject a conforming LMP document for lacking recommended fields.
+A processor MUST NOT reject a conforming LMD document for lacking recommended fields.
 
 ### 4.4. CURIE Resolution
 
@@ -241,7 +241,7 @@ Each frontmatter field that is not a JSON-LD keyword (`@id`, `@type`, `@context`
 
 ### 5.1. Intra-Corpus Links
 
-Links between LMP documents in the same corpus are expressed through Markdown links whose target is another LMP document's filename or IRI. When the target document exists in the corpus, the link is resolved to that document's `id` IRI.
+Links between LMD documents in the same corpus are expressed through Markdown links whose target is another LMD document's filename or IRI. When the target document exists in the corpus, the link is resolved to that document's `id` IRI.
 
 ```markdown
 See [Alice Smith](Alice_Smith.md) for details.
@@ -251,34 +251,34 @@ A processor SHOULD verify that linked targets exist within the corpus and SHOULD
 
 ### 5.2. External Links
 
-Links to IRIs outside the LMP corpus are treated as external references. A processor MAY resolve them but MUST NOT require resolution. External links are preserved as RDF object properties when the predicate is typed.
+Links to IRIs outside the LMD corpus are treated as external references. A processor MAY resolve them but MUST NOT require resolution. External links are preserved as RDF object properties when the predicate is typed.
 
 ### 5.3. Fragment Identifiers
 
-An LMP document may contain sections addressed by fragment identifier (e.g., `#section-2`). These fragments MAY be typed as `rdf:HTML` or `rdf:XMLLiteral` content within the document's RDF representation.
+An LMD document may contain sections addressed by fragment identifier (e.g., `#section-2`). These fragments MAY be typed as `rdf:HTML` or `rdf:XMLLiteral` content within the document's RDF representation.
 
 ## 6. Validation
 
 ### 6.1. SHACL Validation
 
-An LMP processor that supports validation MUST apply SHACL shapes loaded from the corpus's shapes directory against every LMP document. Validation follows the [SHACL 1.1](https://www.w3.org/TR/shacl/) specification:
+An LMD processor that supports validation MUST apply SHACL shapes loaded from the corpus's shapes directory against every LMD document. Validation follows the [SHACL 1.1](https://www.w3.org/TR/shacl/) specification:
 
 - Compliance is determined by `sh:targetClass` matching the document's `@type`.
 - Each shape defines property constraints (`sh:path`, `sh:datatype`, `sh:minCount`, `sh:maxCount`, `sh:pattern`, etc.).
 - A shape may reference other shapes via `sh:node`.
-- A shape may reference JSON Schema via `lmp:jsonSchema` (see 6.2).
+- A shape may reference JSON Schema via `lmd:jsonSchema` (see 6.2).
 
 ### 6.2. JSON Schema Integration
 
-An LMP shape MAY declare a JSON Schema binding via the `lmp:jsonSchema` property. When present, a processor MUST validate the frontmatter's JSON representation against the referenced JSON Schema. This enables validation of deeply nested structures that are awkward to express in SHACL alone.
+An LMD shape MAY declare a JSON Schema binding via the `lmd:jsonSchema` property. When present, a processor MUST validate the frontmatter's JSON representation against the referenced JSON Schema. This enables validation of deeply nested structures that are awkward to express in SHACL alone.
 
 ```turtle
-@prefix lmp: <https://wazootech.github.io/linked-markdown/ns#> .
+@prefix lmd: <https://wazootech.github.io/linked-markdown/ns#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 
 wiki:ContactShape a sh:NodeShape ;
     sh:targetClass wiki:Contact ;
-    lmp:jsonSchema "contact.schema.json" .
+    lmd:jsonSchema "contact.schema.json" .
 ```
 
 ### 6.3. Shape Location
@@ -289,7 +289,7 @@ Shapes are loaded from a directory declared in the corpus configuration. The def
 
 ### 7.1. OWL-RL Deductive Reasoning
 
-An LMP processor that supports inference SHOULD apply OWL-RL deductive reasoning to expand the LMP corpus graph. The OWL-RL rule set is defined by [OWL 2 RL](https://www.w3.org/TR/owl2-profiles/#OWL_2_RL).
+An LMD processor that supports inference SHOULD apply OWL-RL deductive reasoning to expand the LMD corpus graph. The OWL-RL rule set is defined by [OWL 2 RL](https://www.w3.org/TR/owl2-profiles/#OWL_2_RL).
 
 Inference enables subclass reasoning, property chain expansion, and domain/range inference:
 
@@ -315,11 +315,11 @@ A processor MUST allow clients to opt out of inference. The default inference mo
 
 ### 8.1. SPARQL 1.1
 
-An LMP processor that supports query MUST implement SPARQL 1.1 Query Language and Protocol. Processors SHOULD support SELECT, CONSTRUCT, ASK, and DESCRIBE query forms.
+An LMD processor that supports query MUST implement SPARQL 1.1 Query Language and Protocol. Processors SHOULD support SELECT, CONSTRUCT, ASK, and DESCRIBE query forms.
 
 ### 8.2. Embedded Query Blocks
 
-An LMP document may contain SPARQL query blocks embedded as fenced code blocks. These blocks are marked with the language tag `sparql`:
+An LMD document may contain SPARQL query blocks embedded as fenced code blocks. These blocks are marked with the language tag `sparql`:
 
 ````markdown
 ```sparql
@@ -341,7 +341,7 @@ Query results SHOULD be representable in the following formats, at minimum: JSON
 
 ### 9.1. RDF Export
 
-An LMP processor MUST be capable of exporting the LMP corpus graph in at least one of the following RDF serialization formats:
+An LMD processor MUST be capable of exporting the LMD corpus graph in at least one of the following RDF serialization formats:
 
 - JSON-LD 1.1 (compacted or expanded)
 - Turtle (`.ttl`)
@@ -357,9 +357,9 @@ When exporting as JSON-LD, a processor MUST preserve the document's `@context` i
 
 ### 10.1. Static HTML
 
-An LMP processor that supports publishing SHOULD produce a static HTML site from the LMP corpus. The output MUST include:
+An LMD processor that supports publishing SHOULD produce a static HTML site from the LMD corpus. The output MUST include:
 
-- A page for each LMP document, with human-readable rendering of its content.
+- A page for each LMD document, with human-readable rendering of its content.
 - Navigation between linked documents.
 - A machine-readable representation of each document (JSON-LD, Turtle, etc.) linked from the HTML page.
 
@@ -375,15 +375,15 @@ A processor MAY support HTTP content negotiation, serving HTML to browsers and m
 
 ### 11.1. Process Stamps
 
-LMP documents may include provenance metadata in their frontmatter, modeled after the PROV-O ontology. A process stamp records how a document was produced:
+LMD documents may include provenance metadata in their frontmatter, modeled after the PROV-O ontology. A process stamp records how a document was produced:
 
 ```yaml
-lmp:provenance:
-  lmp:transformer: lmp:cli
-  lmp:inputs:
+lmd:provenance:
+  lmd:transformer: lmd:cli
+  lmd:inputs:
     - https://example.org/docs/source-doc
-  lmp:timestamp: "2026-06-23T12:00:00Z"
-  lmp:agent:
+  lmd:timestamp: "2026-06-23T12:00:00Z"
+  lmd:agent:
     @type: schema:Person
     schema:name: "Alice Smith"
 ```
@@ -391,9 +391,9 @@ lmp:provenance:
 ### 11.2. PROV-O Alignment
 
 Process stamps SHOULD align with the W3C PROV-O ontology:
-- `lmp:provenance` maps to `prov:Activity`
-- `lmp:inputs` maps to `prov:used`
-- `lmp:agent` maps to `prov:wasAssociatedWith`
+- `lmd:provenance` maps to `prov:Activity`
+- `lmd:inputs` maps to `prov:used`
+- `lmd:agent` maps to `prov:wasAssociatedWith`
 - The document itself is a `prov:Entity` generated by the activity
 
 ## 12. Security Considerations
@@ -412,25 +412,25 @@ Embedded SPARQL blocks MUST be treated as untrusted input when loaded from untru
 
 ## 13. IANA Considerations
 
-The Linked Markdown Protocol does not currently require any IANA registrations. Future versions may request:
-- A media type registration (e.g., `text/lmp` or `application/lmp+json`)
-- A URI scheme registration (if a dedicated `lmp:` scheme is desired)
+Linked Markdown does not currently require any IANA registrations. Future versions may request:
+- A media type registration (e.g., `text/lmd` or `application/lmd+json`)
+- A URI scheme registration (if a dedicated `lmd:` scheme is desired)
 
 These considerations are deferred until the protocol reaches stability at version 1.0.0.
 
 ---
 
-## Appendix A: Complete LMP Document Example
+## Appendix A: Complete LMD Document Example
 
 ```markdown
 ---
 id: https://example.org/docs/people/alice-smith
 @type:
   - schema:Person
-  - lmp:Document
+  - lmd:Document
 @context:
   schema: https://schema.org/
-  lmp: https://wazootech.github.io/linked-markdown/ns#
+  lmd: https://wazootech.github.io/linked-markdown/ns#
   wiki: https://example.org/docs/
 name: Alice Smith
 description: Profile page for Alice Smith, software engineer.
@@ -441,10 +441,10 @@ schema:knows:
   - wiki:bob-jones
   - wiki:carol-davis
 schema:jobTitle: Senior Software Engineer
-lmp:provenance:
-  lmp:transformer: lmp:cli
-  lmp:timestamp: "2026-06-23T10:00:00Z"
-  lmp:agent:
+lmd:provenance:
+  lmd:transformer: lmd:cli
+  lmd:timestamp: "2026-06-23T10:00:00Z"
+  lmd:agent:
     @type: schema:Person
     schema:name: Alice Smith
 ---
@@ -465,26 +465,26 @@ Alice has been building semantic web applications since 2020.
 
 ---
 
-## Appendix B: LMP Namespace
+## Appendix B: LMD Namespace
 
-The `lmp:` prefix expands to `https://wazootech.github.io/linked-markdown/ns#`. The following terms are defined:
+The `lmd:` prefix expands to `https://wazootech.github.io/linked-markdown/ns#`. The following terms are defined:
 
 | Term | Description |
 |------|-------------|
-| `lmp:Document` | The base type for all LMP documents |
-| `lmp:Specification` | The type for the LMP specification document |
-| `lmp:version` | The LMP specification version a document targets |
-| `lmp:status` | The document's protocol status (Draft, Stable, Deprecated) |
-| `lmp:published` | The document's publication date |
-| `lmp:license` | The document's license IRI |
-| `lmp:repository` | The document's canonical repository |
-| `lmp:supersedes` | An IRI this specification replaces |
-| `lmp:jsonSchema` | Links a SHACL shape to an external JSON Schema file |
-| `lmp:provenance` | Provenance / process stamp metadata |
-| `lmp:transformer` | The tool or agent that produced the document |
-| `lmp:inputs` | Input documents used to produce the document |
-| `lmp:timestamp` | The production timestamp |
-| `lmp:agent` | The agent responsible for production |
+| `lmd:Document` | The base type for all LMD documents |
+| `lmd:Specification` | The type for the LMD specification document |
+| `lmd:version` | The LMD specification version a document targets |
+| `lmd:status` | The document's protocol status (Draft, Stable, Deprecated) |
+| `lmd:published` | The document's publication date |
+| `lmd:license` | The document's license IRI |
+| `lmd:repository` | The document's canonical repository |
+| `lmd:supersedes` | An IRI this specification replaces |
+| `lmd:jsonSchema` | Links a SHACL shape to an external JSON Schema file |
+| `lmd:provenance` | Provenance / process stamp metadata |
+| `lmd:transformer` | The tool or agent that produced the document |
+| `lmd:inputs` | Input documents used to produce the document |
+| `lmd:timestamp` | The production timestamp |
+| `lmd:agent` | The agent responsible for production |
 
 ---
 
@@ -492,13 +492,13 @@ The `lmp:` prefix expands to `https://wazootech.github.io/linked-markdown/ns#`. 
 
 | Term | Definition |
 |------|------------|
-| LMP | The Linked Markdown Protocol |
-| Corpus | A collection of LMP documents sharing a configuration |
-| Document | A single `.md` file with LMP-conforming frontmatter |
+| LMD | Linked Markdown |
+| Corpus | A collection of LMD documents sharing a configuration |
+| Document | A single `.md` file with LMD-conforming frontmatter |
 | Shape | A SHACL constraint definition for validating document structure |
 | Axiom | A set of OWL or SWRL rules for deductive reasoning |
-| Processor | Any tool or library implementing one or more LMP tiers |
-| Frontmatter | The JSON-LD metadata block at the start of an LMP document |
+| Processor | Any tool or library implementing one or more LMD tiers |
+| Frontmatter | The JSON-LD metadata block at the start of an LMD document |
 
 ---
 

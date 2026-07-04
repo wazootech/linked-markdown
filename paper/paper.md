@@ -1,5 +1,5 @@
 ---
-title: "LMP: Linked Markdown Protocol — Markdown as Semantic Infrastructure"
+title: "LMD: Linked Markdown — Markdown as Semantic Infrastructure"
 author:
   - Ethan Davidson ($\texttt{ethandavidson@csu.fullerton.edu}$)
 date: "2026"
@@ -21,13 +21,13 @@ format:
 
 # Abstract
 
-**LMP (Linked Markdown Protocol)** is a specification for structuring,
+**LMD (Linked Markdown)** is a specification for structuring,
 validating, and querying typed Markdown documents as first-class semantic
-graph nodes. An LMP document is simultaneously valid CommonMark and valid
+graph nodes. An LMD document is simultaneously valid CommonMark and valid
 JSON-LD --- rendering in any standard Markdown renderer while participating
 in an RDF graph with SHACL validation, OWL-RL inference, and SPARQL query
 capability. No custom syntax is introduced; the protocol lives entirely in
-frontmatter and linking conventions. This paper presents LMP's design,
+frontmatter and linking conventions. This paper presents LMD's design,
 compares it with related approaches [@cagle2026databooks; @ozekik2023markdownld; @davay422026mdld; @iunera2025jsonldmarkdown], and describes the `wiki` reference implementation.
 The full specification is included as an appendix.
 
@@ -49,25 +49,25 @@ Both approaches have limitations: inline annotations introduce nonstandard
 syntax that can cause unpredictable rendering, while inference loses
 author-intent semantics.
 
-LMP takes a different approach: **frontmatter is JSON-LD**. The protocol
+LMD takes a different approach: **frontmatter is JSON-LD**. The protocol
 requires no custom syntax, no new file extension, and no special renderer.
 A single `@id` and `@type` field in the frontmatter turns any Markdown
-document into a typed RDF node. From this foundation, LMP layers
+document into a typed RDF node. From this foundation, LMD layers
 validation (SHACL), inference (OWL-RL), query (SPARQL), and publishing ---
 each capability independently adoptable by conforming processors.
 
-# LMP Design
+# LMD Design
 
 ## Zero Custom Syntax
 
-LMP introduces no nonstandard Markdown syntax. All protocol semantics are
+LMD introduces no nonstandard Markdown syntax. All protocol semantics are
 expressed through:
 
 - Standard JSON-LD 1.1 frontmatter delimited by `---`
 - Standard CommonMark links for document-level relationships
 - Convention-based file organization (shapes, axioms, corpus structure)
 
-A minimal LMP document is:
+A minimal LMD document is:
 
 ```yaml
 ---
@@ -85,14 +85,14 @@ This file is valid Markdown, valid YAML, and valid JSON-LD simultaneously.
 
 ## Document Model
 
-Every LMP document is identified by a canonical IRI (`@id`) and
+Every LMD document is identified by a canonical IRI (`@id`) and
 one or more RDF types (`@type`). The bare `id` and `type` aliases
 are also valid in YAML frontmatter. Frontmatter fields map directly
 to RDF predicate-value pairs with the document's `id` as subject. The
 Markdown body (everything after the frontmatter) is addressable as an RDF
 literal, typically via `schema:articleBody`.
 
-Documents form a **corpus**: a collection of LMP documents sharing a
+Documents form a **corpus**: a collection of LMD documents sharing a
 configuration, a shapes directory (for SHACL validation), and optional
 axioms (for OWL-RL inference).
 
@@ -106,12 +106,12 @@ object properties. Fragment identifiers (`#section-2`) may be typed as
 
 ## Validation and Inference
 
-LMP delegates validation to **SHACL 1.1** [@shacl].
+LMD delegates validation to **SHACL 1.1** [@shacl].
 Shapes are loaded from a `shapes/` directory in the corpus. Each shape
 targets one or more document types via `sh:targetClass` and defines
 property constraints (`sh:path`, `sh:datatype`, `sh:minCount`, etc.).
 
-Shapes may also reference JSON Schema via `lmp:jsonSchema` for deep
+Shapes may also reference JSON Schema via `lmd:jsonSchema` for deep
 structural validation of nested frontmatter.
 
 Inference follows **OWL-RL** [@owl2rl] deductive reasoning --- enabling subclass
@@ -125,7 +125,7 @@ Corpora are queryable via **SPARQL 1.1** [@sparql11]. Documents may embed SPARQL
 queries in fenced code blocks (`sparql`). Processors render query
 results inline when generating output.
 
-LMP processors may publish corpora as static HTML sites, with content
+LMD processors may publish corpora as static HTML sites, with content
 negotiation supporting HTML (browsers), JSON-LD (agents), and raw Markdown
 (per Cloudflare Markdown for Agents convention).
 
@@ -137,16 +137,16 @@ negotiation supporting HTML (browsers), JSON-LD (agents), and raw Markdown
 | **Markdown-LD** [@ozekik2023markdownld] | Inline Turtle in Markdown body | Nonstandard `{}` annotations | Full RDF |
 | **MD-LD** [@davay422026mdld] | Inline RDF via `{=iri}` syntax | Nonstandard `{=iri}` annotations | Full RDF |
 | **json-ld-markdown** [@iunera2025jsonldmarkdown] | Schema.org inference from structure | None (inference-based) | JSON-LD output only |
-| **LMP** (this paper) | JSON-LD frontmatter, SHACL validation, SPARQL query | Standard JSON-LD/YAML in frontmatter | Full RDF 1.1 |
+| **LMD** (this paper) | JSON-LD frontmatter, SHACL validation, SPARQL query | Standard JSON-LD/YAML in frontmatter | Full RDF 1.1 |
 
 **DataBooks** [@cagle2026databooks] is the closest intellectual precedent.
-LMP adopts the DataBooks vision but diverges by requiring JSON-LD
+LMD adopts the DataBooks vision but diverges by requiring JSON-LD
 frontmatter (not YAML) and zero custom inline syntax, enabling native RDF
 integration without any transformation step.
 
 **Markdown-LD** and **MD-LD** both embed RDF triples directly in Markdown
 body text using custom annotation syntax. These approaches are complementary
-to LMP: LMP addresses document-level typing and corpus-wide validation,
+to LMD: LMD addresses document-level typing and corpus-wide validation,
 while inline annotation systems address triple-level granularity within a
 single document. However, their nonstandard syntax can cause unpredictable
 rendering in standard Markdown renderers, and they require editor plugins
@@ -157,25 +157,25 @@ or preprocessing.
 pipelines, but inference necessarily loses information that only author-
 intent typing can provide.
 
-LMP differs from all prior work in three key ways:
+LMD differs from all prior work in three key ways:
 1. Frontmatter is valid JSON-LD by construction, not converted to RDF
 2. Validation and query are specified using W3C standards (SHACL, SPARQL)
 3. Capabilities are layered (Core, Validation, Query, Publish) and independently adoptable
 
 # Implementation: The wiki CLI
 
-The canonical reference implementation of LMP is the **wiki** command-line
+The canonical reference implementation of LMD is the **wiki** command-line
 tool (`github.com/wazootech/wiki`, package `wazootech-wiki`).
 
 The wiki CLI implements:
 
-- **LMP-Core**: Parsing LMP documents from a filesystem corpus, resolving
+- **LMD-Core**: Parsing LMD documents from a filesystem corpus, resolving
   `@id` and `@type`, producing an RDF 1.1 graph using `rdflib`.
-- **LMP-Validation**: SHACL validation against shapes in a `shapes/`
+- **LMD-Validation**: SHACL validation against shapes in a `shapes/`
   directory, using `pyshacl`.
-- **LMP-Query**: SPARQL 1.1 query execution via `rdflib`-embedded
+- **LMD-Query**: SPARQL 1.1 query execution via `rdflib`-embedded
   SPARQL engine.
-- **LMP-Publish**: Static HTML site generation with content negotiation.
+- **LMD-Publish**: Static HTML site generation with content negotiation.
 - **Virtual Graph Derivation**: The filesystem directory structure is
   treated as a virtual RDF graph, deriving document identity from file
   paths relative to the corpus root.
@@ -190,24 +190,24 @@ publish into independently invocable subcommands.
 
 ## Limitations
 
-LMP currently requires JSON-LD knowledge for document creation. While
-the default context provides commonly used prefixes (`schema`, `lmp`,
+LMD currently requires JSON-LD knowledge for document creation. While
+the default context provides commonly used prefixes (`schema`, `lmd`,
 `rdf`, `rdfs`, `owl`, `sh`, `xsd`, `dc`, `foaf`, `prov`), authors must
 understand basic RDF concepts (IRIs, types, predicates) to create typed
 documents. Tooling improvements --- such as CLI scaffolding commands
 (`wiki init`, `wiki new`) --- reduce this burden.
 
-Interoperability with non-LMP Markdown tools is a deliberate design
-constraint. Any CommonMark renderer can display an LMP document, but
-only LMP processors can validate, query, or publish it. This is
+Interoperability with non-LMD Markdown tools is a deliberate design
+constraint. Any CommonMark renderer can display an LMD document, but
+only LMD processors can validate, query, or publish it. This is
 acceptable: the protocol follows the robustness principle of being
 liberal in what it accepts (any Markdown file with JSON-LD frontmatter)
 and conservative in what it produces (valid RDF).
 
 ## Adoption Path
 
-LMP is incrementally adoptable. A single file with an `@id` and `@type`
-in its frontmatter is a valid LMP document. Adding a shapes file enables
+LMD is incrementally adoptable. A single file with an `@id` and `@type`
+in its frontmatter is a valid LMD document. Adding a shapes file enables
 validation. Adding a SPARQL query enables query. Adding a publish
 configuration enables HTML output. Each capability can be adopted
 independently.
@@ -218,22 +218,22 @@ organically.
 
 # Future Work
 
-- **LMP Schema Registry**: A community-maintained registry of SHACL shapes
+- **LMD Schema Registry**: A community-maintained registry of SHACL shapes
   for common document types (Person, Organization, Article, Book, etc.),
   analogous to Schema.org but expressed as SHACL.
 - **Crawl and Federate**: Cross-corpus SPARQL federation enabling queries
-  across multiple LMP-published sites.
-- **lmp:scheme**: A dedicated URI scheme for LMP document resolution,
+  across multiple LMD-published sites.
+- **lmd:scheme**: A dedicated URI scheme for LMD document resolution,
   potentially registered with IANA.
 - **Interoperability Layer**: Bridge to other Markdown semantic systems
   (Markdown-LD, MD-LD) via SHACL shapes and RDF transformation pipelines.
 
 # Conclusion
 
-LMP demonstrates that Markdown can serve as a first-class semantic
+LMD demonstrates that Markdown can serve as a first-class semantic
 infrastructure without sacrificing its core virtues: simplicity,
 portability, and human readability. By restricting protocol semantics
-to standard JSON-LD frontmatter and CommonMark links, LMP enables
+to standard JSON-LD frontmatter and CommonMark links, LMD enables
 typed, validatable, queryable Markdown documents that remain fully
 compatible with existing tools and workflows.
 
@@ -244,9 +244,9 @@ The full specification follows in Appendix A.
 <!-- Bibliography is auto-generated by pandoc-citeproc from references.bib -->
 <div id="refs"></div>
 
-# Appendix A: LMP Specification
+# Appendix A: LMD Specification
 
-> This appendix contains the complete LMP specification, also available
+> This appendix contains the complete LMD specification, also available
 > at `https://wazootech.github.io/linked-markdown/spec/`.
 
 <!-- Full spec content below -->
