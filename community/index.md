@@ -1,4 +1,4 @@
-# Linked Markdown Protocol — Community
+# Linked Markdown — Community
 
 W3C JSON for Linked Data Community Group introduction materials.
 

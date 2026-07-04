@@ -1,11 +1,11 @@
-### New work item: Linked Markdown Protocol (LMP)
+### New work item: Linked Markdown (LMD)
 
 **Spec:** https://wazootech.github.io/linked-markdown/spec/
 **Repo:** https://github.com/wazootech/linked-markdown
 **Proposed by:** Ethan Davidson (https://etok.me)
 
-LMP is a specification for structuring, validating, and querying typed
-Markdown documents as first-class semantic graph nodes. Every LMP document
+LMD is a specification for structuring, validating, and querying typed
+Markdown documents as first-class semantic graph nodes. Every LMD document
 is simultaneously valid CommonMark and valid JSON-LD 1.1 — `id` + `@type`
 in the frontmatter turns any `.md` file into a typed RDF node.
 
