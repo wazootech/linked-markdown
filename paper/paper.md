@@ -1,7 +1,7 @@
 ---
 title: "LMD: Linked Markdown — Markdown as Semantic Infrastructure"
 author:
-  - Ethan Davidson ($\texttt{ethandavidson@csu.fullerton.edu}$)
+  - Ethan Davidson ($\texttt{ethan@wazoo.dev}$)
 date: "2026"
 arxiv:
   primary_category: cs.SE
