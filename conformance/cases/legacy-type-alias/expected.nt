@@ -1,0 +1,3 @@
+<https://example.org/docs/legacy-type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://schema.org/Note> .
+<https://example.org/docs/legacy-type> <https://schema.org/articleBody> "Legacy `type` is accepted as an alias for `@type`.\n" .
+<https://example.org/docs/legacy-type> <https://schema.org/name> "Legacy Type Alias" .

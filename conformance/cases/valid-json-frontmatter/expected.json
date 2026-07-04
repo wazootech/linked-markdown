@@ -1,0 +1,19 @@
+{
+  "id": "https://example.org/docs/json",
+  "types": [
+    "https://schema.org/CreativeWork"
+  ],
+  "context": {
+    "schema": "https://schema.org/"
+  },
+  "frontmatter": {
+    "@id": "https://example.org/docs/json",
+    "@type": "schema:CreativeWork",
+    "@context": {
+      "schema": "https://schema.org/"
+    },
+    "schema:name": "JSON Frontmatter"
+  },
+  "body": "# JSON Frontmatter\n\nThe frontmatter block may use JSON syntax.\n",
+  "links": []
+}

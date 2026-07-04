@@ -1,0 +1,3 @@
+<https://example.org/docs/json> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://schema.org/CreativeWork> .
+<https://example.org/docs/json> <https://schema.org/articleBody> "# JSON Frontmatter\n\nThe frontmatter block may use JSON syntax.\n" .
+<https://example.org/docs/json> <https://schema.org/name> "JSON Frontmatter" .

@@ -1,0 +1,71 @@
+{
+  "suite": "linked-markdown-conformance",
+  "specVersion": "0.1.0",
+  "formatVersion": 1,
+  "cases": [
+    {
+      "id": "valid-minimal-yaml",
+      "tier": "LMD-Core",
+      "description": "Minimal conforming YAML frontmatter document.",
+      "input": "cases/valid-minimal-yaml/input.md",
+      "expect": {
+        "parsed": "cases/valid-minimal-yaml/expected.json",
+        "rdf": "cases/valid-minimal-yaml/expected.nt"
+      },
+      "tags": ["frontmatter", "yaml", "required-fields"]
+    },
+    {
+      "id": "valid-json-frontmatter",
+      "tier": "LMD-Core",
+      "description": "JSON frontmatter is valid because YAML is a JSON superset.",
+      "input": "cases/valid-json-frontmatter/input.md",
+      "expect": {
+        "parsed": "cases/valid-json-frontmatter/expected.json",
+        "rdf": "cases/valid-json-frontmatter/expected.nt"
+      },
+      "tags": ["frontmatter", "json"]
+    },
+    {
+      "id": "legacy-type-alias",
+      "tier": "LMD-Core",
+      "description": "Legacy type is normalized as @type.",
+      "input": "cases/legacy-type-alias/input.md",
+      "expect": {
+        "parsed": "cases/legacy-type-alias/expected.json",
+        "rdf": "cases/legacy-type-alias/expected.nt"
+      },
+      "tags": ["frontmatter", "legacy", "type"]
+    },
+    {
+      "id": "body-links",
+      "tier": "LMD-Core",
+      "description": "Markdown and wikilinks are extracted from body text.",
+      "input": "cases/body-links/input.md",
+      "expect": {
+        "parsed": "cases/body-links/expected.json",
+        "rdf": "cases/body-links/expected.nt"
+      },
+      "tags": ["links", "markdown", "wikilinks"]
+    },
+    {
+      "id": "missing-id",
+      "tier": "LMD-Core",
+      "description": "Documents without id or @id fail with a stable code.",
+      "input": "cases/missing-id/input.md",
+      "expectError": {
+        "code": "LMD_MISSING_ID"
+      },
+      "tags": ["errors", "required-fields"]
+    },
+    {
+      "id": "missing-type",
+      "tier": "LMD-Core",
+      "description": "Documents without @type or legacy type fail with a stable code.",
+      "input": "cases/missing-type/input.md",
+      "expectError": {
+        "code": "LMD_MISSING_TYPE"
+      },
+      "tags": ["errors", "required-fields"]
+    }
+  ]
+}

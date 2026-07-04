@@ -1,0 +1,2 @@
+<https://example.org/docs/minimal> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://schema.org/Article> .
+<https://example.org/docs/minimal> <https://schema.org/articleBody> "# Minimal\n\nHello world.\n" .
