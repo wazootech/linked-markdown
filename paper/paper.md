@@ -4,11 +4,13 @@ author:
   - Ethan Davidson ($\texttt{ethan@wazoo.dev}$)
 date: "2026"
 arxiv:
-  primary_category: cs.SE
+  primary_category: cs.DL
   categories:
-    - cs.SE
     - cs.DL
+    - cs.SE
     - cs.IR
+  license: CC_BY_4_0
+  comments: "30 pages, 1 table. Full LMD specification included as Appendix A."
 bibliography: references.bib
 format:
   pdf:
