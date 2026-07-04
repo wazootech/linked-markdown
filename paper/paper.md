@@ -188,6 +188,8 @@ publish into independently invocable subcommands.
 
 # Discussion
 
+A central design choice is that LMD does not define its own vocabulary for general-purpose metadata. The `lmd:` namespace is reserved for protocol-layer concerns: document types, versioning, validation bindings, and provenance. For subject-matter properties, LMD documents use established vocabularies such as Schema.org, Dublin Core, FOAF, and PROV-O. This keeps the `lmd:` namespace small and scoped, and means LMD is not a competing vocabulary standard — it is a Markdown-compatible container in which those vocabularies live.
+
 ## Limitations
 
 LMD currently requires JSON-LD knowledge for document creation. While

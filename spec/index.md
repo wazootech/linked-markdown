@@ -166,7 +166,15 @@ The context MUST include at minimum:
 
 Processors SHOULD provide a default context that includes commonly used prefixes (`schema`, `lmd`, `rdf`, `rdfs`, `owl`, `sh`, `xsd`, `dc`, `dcterms`, `foaf`, `prov`). A document may override any default prefix.
 
-### 3.4. Body Content
+### 3.4. Vocabulary Conventions
+
+The `lmd:` prefix defines terms specific to the LMD protocol layer — document types, versioning, validation metadata, and provenance stamps. These terms describe a document's relationship to the LMD protocol rather than its subject matter.
+
+For subject-matter and general-purpose metadata, documents SHOULD use established vocabularies such as Schema.org (`schema:`), Dublin Core (`dcterms:`), FOAF (`foaf:`), or PROV-O (`prov:`). A document that uses only standard vocabularies without any `lmd:`-prefixed properties is a valid LMD document. LMD does not replace existing vocabularies; it provides a Markdown-compatible substrate in which they coexist.
+
+A processor MAY define equivalence mappings between `lmd:` terms and terms in other vocabularies to improve interoperability with non-LMD RDF consumers. Such mappings are processor-specific and not required for conformance.
+
+### 3.5. Body Content
 
 The Markdown body text (everything after the frontmatter) is part of the LMD document and is addressable as an RDF literal via the configured content predicate. The default content predicate is `schema:articleBody`.
 
@@ -177,7 +185,7 @@ A processor MAY include the body text as a literal triple in the document's RDF 
 
 A processor MUST NOT require body content. An LMD document may consist only of frontmatter.
 
-### 3.5. Links as Properties
+### 3.6. Links as Properties
 
 Standard Markdown links `[text](target)` in the body are interpreted as potential RDF object properties by a processor, but the protocol does not mandate automatic triple generation from arbitrary inline links. Only links whose semantic role is declared (via frontmatter, shape, or explicit convention such as `wikilinks` to other LMD documents) produce triples.
 
