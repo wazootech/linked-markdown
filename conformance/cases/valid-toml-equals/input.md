@@ -1,8 +1,8 @@
 = toml =
-@id = "https://example.org/docs/fixture"
-@type = "schema:Article"
+"@id" = "https://example.org/docs/fixture"
+"@type" = "schema:Article"
 
-[@context]
+["@context"]
 schema = "https://schema.org/"
 
 "schema:name" = "Delimiter Fixture"

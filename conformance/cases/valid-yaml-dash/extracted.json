@@ -1,5 +1,5 @@
 {
-  "frontMatter": "@id: https://example.org/docs/fixture\n@type: schema:Article\n@context:\n  schema: https://schema.org/\nschema:name: Delimiter Fixture\nkeywords:\n  - one\n  - two\n  - three\n",
+  "frontMatter": "\"@id\": https://example.org/docs/fixture\n\"@type\": schema:Article\n\"@context\":\n  schema: https://schema.org/\nschema:name: Delimiter Fixture\nkeywords:\n  - one\n  - two\n  - three\n",
   "body": "# Fixture\n\nThis is the body content.\n\n- Item 1\n- Item 2\n",
   "attrs": {
     "@id": "https://example.org/docs/fixture",
