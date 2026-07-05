@@ -1,5 +1,5 @@
 {
-  "frontMatter": "\"@id\" = \"https://example.org/docs/fixture\"\n\"@type\" = \"schema:Article\"\n\n[\"@context\"]\nschema = \"https://schema.org/\"\n\n\"schema:name\" = \"Delimiter Fixture\"\nkeywords = [\"one\", \"two\", \"three\"]\n",
+  "frontMatter": "\"@id\" = \"https://example.org/docs/fixture\"\n\"@type\" = \"schema:Article\"\n\"schema:name\" = \"Delimiter Fixture\"\nkeywords = [\"one\", \"two\", \"three\"]\n\n[\"@context\"]\nschema = \"https://schema.org/\"\n",
   "body": "# Fixture\n\nThis is the body content.\n\n- Item 1\n- Item 2\n",
   "attrs": {
     "@id": "https://example.org/docs/fixture",
