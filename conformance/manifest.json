@@ -4,52 +4,127 @@
   "formatVersion": 1,
   "cases": [
     {
-      "id": "valid-minimal-yaml",
-      "tier": "LMD-Core",
-      "description": "Minimal conforming YAML frontmatter document.",
-      "input": "cases/valid-minimal-yaml/input.md",
+      "id": "valid-yaml-dash",
+      "tiers": ["LMD-Parse", "LMD-Extract"],
+      "description": "YAML frontmatter with unmarked --- delimiters.",
+      "input": "cases/valid-yaml-dash/input.md",
       "expect": {
-        "parsed": "cases/valid-minimal-yaml/expected.json",
-        "rdf": "cases/valid-minimal-yaml/expected.nt"
+        "parsed": "cases/valid-yaml-dash/expected.json",
+        "extracted": "cases/valid-yaml-dash/extracted.json"
       },
-      "tags": ["frontmatter", "yaml"]
+      "tags": ["frontmatter", "yaml", "dash"]
     },
     {
-      "id": "valid-json-frontmatter",
-      "tier": "LMD-Core",
-      "description": "JSON frontmatter is valid because YAML is a JSON superset.",
-      "input": "cases/valid-json-frontmatter/input.md",
+      "id": "valid-yaml-marker",
+      "tiers": ["LMD-Parse", "LMD-Extract"],
+      "description": "YAML frontmatter with ---yaml marker.",
+      "input": "cases/valid-yaml-marker/input.md",
       "expect": {
-        "parsed": "cases/valid-json-frontmatter/expected.json",
-        "rdf": "cases/valid-json-frontmatter/expected.nt"
+        "parsed": "cases/valid-yaml-marker/expected.json",
+        "extracted": "cases/valid-yaml-marker/extracted.json"
       },
-      "tags": ["frontmatter", "json"]
+      "tags": ["frontmatter", "yaml", "marker"]
+    },
+    {
+      "id": "valid-yaml-equals",
+      "tiers": ["LMD-Parse", "LMD-Extract"],
+      "description": "YAML frontmatter with = yaml = equals delimiters.",
+      "input": "cases/valid-yaml-equals/input.md",
+      "expect": {
+        "parsed": "cases/valid-yaml-equals/expected.json",
+        "extracted": "cases/valid-yaml-equals/extracted.json"
+      },
+      "tags": ["frontmatter", "yaml", "equals"]
+    },
+    {
+      "id": "valid-json-dash",
+      "tiers": ["LMD-Parse", "LMD-Extract"],
+      "description": "JSON frontmatter with unmarked --- delimiters.",
+      "input": "cases/valid-json-dash/input.md",
+      "expect": {
+        "parsed": "cases/valid-json-dash/expected.json",
+        "extracted": "cases/valid-json-dash/extracted.json"
+      },
+      "tags": ["frontmatter", "json", "dash"]
+    },
+    {
+      "id": "valid-json-marker",
+      "tiers": ["LMD-Parse", "LMD-Extract"],
+      "description": "JSON frontmatter with ---json marker.",
+      "input": "cases/valid-json-marker/input.md",
+      "expect": {
+        "parsed": "cases/valid-json-marker/expected.json",
+        "extracted": "cases/valid-json-marker/extracted.json"
+      },
+      "tags": ["frontmatter", "json", "marker"]
+    },
+    {
+      "id": "valid-json-equals",
+      "tiers": ["LMD-Parse", "LMD-Extract"],
+      "description": "JSON frontmatter with = json = equals delimiters.",
+      "input": "cases/valid-json-equals/input.md",
+      "expect": {
+        "parsed": "cases/valid-json-equals/expected.json",
+        "extracted": "cases/valid-json-equals/extracted.json"
+      },
+      "tags": ["frontmatter", "json", "equals"]
+    },
+    {
+      "id": "valid-toml-marker",
+      "tiers": ["LMD-Parse", "LMD-Extract"],
+      "description": "TOML frontmatter with ---toml marker.",
+      "input": "cases/valid-toml-marker/input.md",
+      "expect": {
+        "parsed": "cases/valid-toml-marker/expected.json",
+        "extracted": "cases/valid-toml-marker/extracted.json"
+      },
+      "tags": ["frontmatter", "toml", "marker"]
+    },
+    {
+      "id": "valid-toml-plus",
+      "tiers": ["LMD-Parse", "LMD-Extract"],
+      "description": "TOML frontmatter with +++ delimiters.",
+      "input": "cases/valid-toml-plus/input.md",
+      "expect": {
+        "parsed": "cases/valid-toml-plus/expected.json",
+        "extracted": "cases/valid-toml-plus/extracted.json"
+      },
+      "tags": ["frontmatter", "toml", "plus"]
+    },
+    {
+      "id": "valid-toml-equals",
+      "tiers": ["LMD-Parse", "LMD-Extract"],
+      "description": "TOML frontmatter with = toml = equals delimiters.",
+      "input": "cases/valid-toml-equals/input.md",
+      "expect": {
+        "parsed": "cases/valid-toml-equals/expected.json",
+        "extracted": "cases/valid-toml-equals/extracted.json"
+      },
+      "tags": ["frontmatter", "toml", "equals"]
     },
     {
       "id": "canonical-type",
-      "tier": "LMD-Core",
+      "tiers": ["LMD-Parse"],
       "description": "Canonical @type keyword in frontmatter.",
       "input": "cases/canonical-type/input.md",
       "expect": {
-        "parsed": "cases/canonical-type/expected.json",
-        "rdf": "cases/canonical-type/expected.nt"
+        "parsed": "cases/canonical-type/expected.json"
       },
       "tags": ["frontmatter", "type"]
     },
     {
       "id": "body-links",
-      "tier": "LMD-Core",
+      "tiers": ["LMD-Parse"],
       "description": "Links in the body are not included in the core parse output. The parsed node contains only frontmatter properties.",
       "input": "cases/body-links/input.md",
       "expect": {
-        "parsed": "cases/body-links/expected.json",
-        "rdf": "cases/body-links/expected.nt"
+        "parsed": "cases/body-links/expected.json"
       },
       "tags": ["links", "markdown", "wikilinks"]
     },
     {
       "id": "missing-id",
-      "tier": "LMD-Core",
+      "tiers": ["LMD-Parse"],
       "description": "Missing @id is valid; the parsed node simply lacks an @id.",
       "input": "cases/missing-id/input.md",
       "expect": {
@@ -59,13 +134,164 @@
     },
     {
       "id": "missing-type",
-      "tier": "LMD-Core",
+      "tiers": ["LMD-Parse"],
       "description": "Missing @type is valid; the parsed node simply lacks an @type.",
       "input": "cases/missing-type/input.md",
       "expect": {
         "parsed": "cases/missing-type/expected.json"
       },
       "tags": ["frontmatter", "optional-fields"]
+    },
+    {
+      "id": "valid-empty-frontmatter",
+      "tiers": ["LMD-Parse", "LMD-Extract"],
+      "description": "Empty frontmatter with only delimiters and no content between them.",
+      "input": "cases/valid-empty-frontmatter/input.md",
+      "expect": {
+        "parsed": "cases/valid-empty-frontmatter/expected.json",
+        "extracted": "cases/valid-empty-frontmatter/extracted.json"
+      },
+      "tags": ["frontmatter", "edge-case"]
+    },
+    {
+      "id": "bare-keywords-preserved",
+      "tiers": ["LMD-Parse", "LMD-Extract"],
+      "description": "Bare keywords id, type, context are preserved as-is without @ prefix expansion.",
+      "input": "cases/bare-keywords-preserved/input.md",
+      "expect": {
+        "parsed": "cases/bare-keywords-preserved/expected.json",
+        "extracted": "cases/bare-keywords-preserved/extracted.json"
+      },
+      "tags": ["frontmatter", "keywords"]
+    },
+    {
+      "id": "crlf-line-endings",
+      "tiers": ["LMD-Parse", "LMD-Extract"],
+      "description": "CRLF line endings in frontmatter are handled correctly.",
+      "input": "cases/crlf-line-endings/input.md",
+      "expect": {
+        "parsed": "cases/crlf-line-endings/expected.json",
+        "extracted": "cases/crlf-line-endings/extracted.json"
+      },
+      "tags": ["line-endings", "crlf"]
+    },
+    {
+      "id": "utf8-bom",
+      "tiers": ["LMD-Parse", "LMD-Extract"],
+      "description": "UTF-8 BOM at the start of the file is stripped before frontmatter parsing.",
+      "input": "cases/utf8-bom/input.md",
+      "expect": {
+        "parsed": "cases/utf8-bom/expected.json",
+        "extracted": "cases/utf8-bom/extracted.json"
+      },
+      "tags": ["encoding", "bom"]
+    },
+    {
+      "id": "body-delimiter-ignored-by-parse",
+      "tiers": ["LMD-Parse", "LMD-Extract"],
+      "description": "Triple dashes in the body are ignored by frontmatter parsing.",
+      "input": "cases/body-delimiter-ignored-by-parse/input.md",
+      "expect": {
+        "parsed": "cases/body-delimiter-ignored-by-parse/expected.json",
+        "extracted": "cases/body-delimiter-ignored-by-parse/extracted.json"
+      },
+      "tags": ["body", "delimiter", "edge-case"]
+    },
+    {
+      "id": "missing-frontmatter",
+      "tiers": ["LMD-Parse"],
+      "description": "File with no frontmatter at all produces LMD_NO_FRONTMATTER error.",
+      "input": "cases/missing-frontmatter/input.md",
+      "expect": {
+        "error": {
+          "code": "LMD_NO_FRONTMATTER"
+        }
+      },
+      "tags": ["error", "missing"]
+    },
+    {
+      "id": "invalid-unknown-marker",
+      "tiers": ["LMD-Parse"],
+      "description": "Unknown marker ---bogus produces LMD_INVALID_FRONTMATTER error.",
+      "input": "cases/invalid-unknown-marker/input.md",
+      "expect": {
+        "error": {
+          "code": "LMD_INVALID_FRONTMATTER"
+        }
+      },
+      "tags": ["error", "marker"]
+    },
+    {
+      "id": "invalid-malformed-yaml",
+      "tiers": ["LMD-Parse"],
+      "description": "Malformed YAML content produces LMD_INVALID_FRONTMATTER error.",
+      "input": "cases/invalid-malformed-yaml/input.md",
+      "expect": {
+        "error": {
+          "code": "LMD_INVALID_FRONTMATTER"
+        }
+      },
+      "tags": ["error", "yaml"]
+    },
+    {
+      "id": "invalid-malformed-json",
+      "tiers": ["LMD-Parse"],
+      "description": "Malformed JSON content produces LMD_INVALID_FRONTMATTER error.",
+      "input": "cases/invalid-malformed-json/input.md",
+      "expect": {
+        "error": {
+          "code": "LMD_INVALID_FRONTMATTER"
+        }
+      },
+      "tags": ["error", "json"]
+    },
+    {
+      "id": "invalid-malformed-toml",
+      "tiers": ["LMD-Parse"],
+      "description": "Malformed TOML content produces LMD_INVALID_FRONTMATTER error.",
+      "input": "cases/invalid-malformed-toml/input.md",
+      "expect": {
+        "error": {
+          "code": "LMD_INVALID_FRONTMATTER"
+        }
+      },
+      "tags": ["error", "toml"]
+    },
+    {
+      "id": "invalid-non-object",
+      "tiers": ["LMD-Parse"],
+      "description": "Frontmatter that parses to a non-object value produces LMD_INVALID_FRONTMATTER error.",
+      "input": "cases/invalid-non-object/input.md",
+      "expect": {
+        "error": {
+          "code": "LMD_INVALID_FRONTMATTER"
+        }
+      },
+      "tags": ["error", "type"]
+    },
+    {
+      "id": "invalid-mismatched-delimiter",
+      "tiers": ["LMD-Parse"],
+      "description": "Marker hints JSON but content is YAML; parse failure produces LMD_INVALID_FRONTMATTER error.",
+      "input": "cases/invalid-mismatched-delimiter/input.md",
+      "expect": {
+        "error": {
+          "code": "LMD_INVALID_FRONTMATTER"
+        }
+      },
+      "tags": ["error", "mismatch"]
+    },
+    {
+      "id": "invalid-no-closing-delimiter",
+      "tiers": ["LMD-Parse"],
+      "description": "File with opening --- but no closing delimiter produces LMD_INVALID_FRONTMATTER error.",
+      "input": "cases/invalid-no-closing-delimiter/input.md",
+      "expect": {
+        "error": {
+          "code": "LMD_INVALID_FRONTMATTER"
+        }
+      },
+      "tags": ["error", "delimiter"]
     }
   ]
 }

@@ -1,0 +1,5 @@
+{
+  "frontMatter": "@id: https://example.org/docs/crlf\ntitle: CRLF Test\n",
+  "body": "Body content after CRLF.\n",
+  "attrs": {"@id": "https://example.org/docs/crlf", "title": "CRLF Test"}
+}

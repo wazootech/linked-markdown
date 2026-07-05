@@ -1,0 +1,5 @@
+{
+  "frontMatter": "@id: https://example.org/docs/bom\ntitle: BOM Test\n",
+  "body": "Body\n",
+  "attrs": {"@id": "https://example.org/docs/bom", "title": "BOM Test"}
+}

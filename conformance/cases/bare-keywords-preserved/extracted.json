@@ -1,0 +1,5 @@
+{
+  "frontMatter": "id: my-id\ntype: my-type\ncontext: my-context\n",
+  "body": "Body\n",
+  "attrs": {"id": "my-id", "type": "my-type", "context": "my-context"}
+}

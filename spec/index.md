@@ -186,7 +186,25 @@ Standard Markdown links `[text](target)` in the body are interpreted as potentia
 
 ### 4.1. Syntax
 
-Frontmatter MUST be a JSON-LD 1.1 document delimited by `---`. The frontmatter may use either JSON or YAML syntax, as YAML is a superset of JSON.
+Frontmatter MUST be a JSON-LD 1.1 document delimited by a supported delimiter pair. A processor MUST recognize the following delimiter patterns and their associated format expectations:
+
+| Delimiter | Format | Closing Delimiter |
+|-----------|--------|-------------------|
+| `---` | YAML-family (YAML or JSON, since YAML is a JSON superset) | `---` |
+| `---yaml` | YAML | `---` |
+| `---json` | JSON | `---` |
+| `---toml` | TOML | `---` |
+| `+++` | TOML | `+++` |
+| `= yaml =` | YAML (accepted, not recommended) | `= yaml =` |
+| `= json =` | JSON (accepted, not recommended) | `= json =` |
+| `= toml =` | TOML (accepted, not recommended) | `= toml =` |
+
+The format hint determines how the processor parses the frontmatter content:
+- **YAML-family**: processed with a YAML 1.x parser (which natively handles JSON).
+- **JSON**: processed with a JSON parser.
+- **TOML**: processed with a TOML parser.
+
+A processor MUST reject frontmatter whose content cannot be parsed according to the indicated format:
 
 ```markdown
 ---
@@ -211,7 +229,6 @@ YAML syntax is also conforming:
   schema: https://schema.org/
 name: Example Document
 ---
-```
 
 ### 4.2. Fields
 

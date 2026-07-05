@@ -1,0 +1,5 @@
+﻿---
+@id: https://example.org/docs/bom
+title: BOM Test
+---
+Body

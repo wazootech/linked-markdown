@@ -1,2 +1,0 @@
-<https://example.org/docs/links> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://schema.org/Article> .
-<https://example.org/docs/links> <https://schema.org/articleBody> "# Links\n\nSee [the spec](https://wazootech.github.io/linked-markdown/spec/) and [[Local Note]].\n\nIgnore `[[Code Link]]` in code spans.\n" .

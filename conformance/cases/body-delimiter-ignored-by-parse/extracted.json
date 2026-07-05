@@ -1,0 +1,5 @@
+{
+  "frontMatter": "title: Delimiter in Body\n",
+  "body": "# Body\n\nTriple dashes in body:\n\n---\n\nMore content.\n",
+  "attrs": {"title": "Delimiter in Body"}
+}
