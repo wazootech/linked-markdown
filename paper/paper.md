@@ -87,7 +87,7 @@ This file is valid Markdown, valid YAML, and valid JSON-LD simultaneously.
 
 ## Document Model
 
-Every LMD document is identified by a canonical IRI (`@id`) and
+Every LMD document is identified by a canonical IRI (`"@id"`) and
 one or more RDF types (`@type`). The `@id` and `@type` keywords
 are also valid in YAML frontmatter. Frontmatter fields map directly
 to RDF predicate-value pairs with the document's `@id` as subject. The
@@ -348,7 +348,7 @@ A SHACL shapes graph conforms to LMD if it is valid SHACL per the W3C SHACL spec
 
 ### 3.1. Document Identity
 
-Every LMD document has a canonical IRI in its `@id` field. This IRI is the document's identity within the LMD corpus and serves as the RDF subject for all triples generated from the document's frontmatter.
+An LMD document SHOULD declare a canonical IRI in its `@id` field. When present, this IRI is the document's identity within the LMD corpus and serves as the RDF subject for all triples generated from the document's frontmatter.
 
 The `@id` SHOULD be a dereferenceable HTTP(S) IRI. The `@id` MAY be a URN or tag URI for documents that are not publicly hosted.
 
@@ -358,7 +358,7 @@ The `@id` SHOULD be a dereferenceable HTTP(S) IRI. The `@id` MAY be a URN or tag
 
 ### 3.2. Document Type
 
-Every LMD document declares its semantic type via `@type`. The value MUST be one or more IRI references, which may use CURIE notation when a `@context` is present.
+An LMD document SHOULD declare its semantic type via `@type`. The value SHOULD be one or more IRI references, which may use CURIE notation when a `@context` is present.
 
 ```yaml
 @type:
