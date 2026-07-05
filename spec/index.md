@@ -96,30 +96,23 @@ A document conforms to LMD if and only if:
 1. It is a syntactically valid Markdown document per the CommonMark specification.
 2. It contains exactly one JSON-LD frontmatter block delimited by `---` at the start of the file.
 3. The frontmatter block is valid JSON-LD per [JSON-LD 1.1](https://www.w3.org/TR/json-ld11/).
-4. The frontmatter block includes an `@id` field whose value is an absolute IRI.
-5. The frontmatter block includes a `@type` field.
 
 The minimum viable LMD document:
 
 ```markdown
 ---
-"@id": https://example.org/docs/my-item
-"@type": schema:Article
-"@context":
-  schema: https://schema.org/
 ---
-
 # My Item
 Content here.
 ```
 
-A processor MUST NOT reject a conforming LMD document for lacking optional fields such as `@context`, `name`, or `description`.
+A processor MUST NOT reject a conforming LMD document for lacking optional fields such as `@id`, `@type`, `@context`, `name`, or `description`.
 
 ### 2.2. Processor Conformance
 
 A processor conforms to LMD if it implements at least one of the following capability tiers at the required conformance level:
 
-- **LMD-Core** — Must parse frontmatter as JSON-LD, resolve `@id` and `@type`, and produce an RDF 1.1 graph.
+- **LMD-Core** — Must parse frontmatter as JSON-LD and produce an RDF 1.1 graph.
 - **LMD-Validation** — Must implement SHACL validation per [SHACL 1.1](https://www.w3.org/TR/shacl/).
 - **LMD-Query** — Must implement SPARQL 1.1 query execution against the LMD graph.
 - **LMD-Publish** — Must produce static HTML output consistent with the LMD document's semantic content.
@@ -220,17 +213,12 @@ name: Example Document
 ---
 ```
 
-### 4.2. Required Fields
+### 4.2. Fields
 
 | Field | Type | Description |
 |-------|------|-------------|
 | `@id` | IRI | Canonical identifier for the document |
 | `@type` | IRI or IRI[] | RDF type(s) of the document |
-
-### 4.3. Recommended Fields
-
-| Field | Type | Description |
-|-------|------|-------------|
 | `@context` | Object | CURIE prefix mappings |
 | `name` | string | Human-readable title |
 | `description` | string | Short summary (aim for 200 chars or less) |

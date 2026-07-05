@@ -315,17 +315,12 @@ A document conforms to LMD if and only if:
 1. It is a syntactically valid Markdown document per the CommonMark specification.
 2. It contains exactly one JSON-LD frontmatter block delimited by `---` at the start of the file.
 3. The frontmatter block is valid JSON-LD per [JSON-LD 1.1](https://www.w3.org/TR/json-ld11/).
-4. The frontmatter block includes an `@id` field whose value is an absolute IRI.
-5. The frontmatter block includes a `@type` field.
 
 The minimum viable LMD document:
 
 ```markdown
 ---
-"@id": https://example.org/docs/my-item
-@type: schema:Article
-@context:
-  schema: https://schema.org/
+---
 ---
 
 # My Item

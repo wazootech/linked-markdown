@@ -50,22 +50,22 @@
     {
       "id": "missing-id",
       "tier": "LMD-Core",
-      "description": "Documents without id or @id fail with a stable code.",
+      "description": "Missing @id is valid; the parsed node simply lacks an @id.",
       "input": "cases/missing-id/input.md",
-      "expectError": {
-        "code": "LMD_MISSING_ID"
+      "expect": {
+        "parsed": "cases/missing-id/expected.json"
       },
-      "tags": ["errors", "required-fields"]
+      "tags": ["frontmatter", "optional-fields"]
     },
     {
       "id": "missing-type",
       "tier": "LMD-Core",
-      "description": "Documents without @type or legacy type fail with a stable code.",
+      "description": "Missing @type is valid; the parsed node simply lacks an @type.",
       "input": "cases/missing-type/input.md",
-      "expectError": {
-        "code": "LMD_MISSING_TYPE"
+      "expect": {
+        "parsed": "cases/missing-type/expected.json"
       },
-      "tags": ["errors", "required-fields"]
+      "tags": ["frontmatter", "optional-fields"]
     }
   ]
 }
