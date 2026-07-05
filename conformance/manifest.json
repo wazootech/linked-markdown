@@ -12,7 +12,7 @@
         "parsed": "cases/valid-minimal-yaml/expected.json",
         "rdf": "cases/valid-minimal-yaml/expected.nt"
       },
-      "tags": ["frontmatter", "yaml", "required-fields"]
+      "tags": ["frontmatter", "yaml"]
     },
     {
       "id": "valid-json-frontmatter",
@@ -26,15 +26,15 @@
       "tags": ["frontmatter", "json"]
     },
     {
-      "id": "legacy-type-alias",
+      "id": "canonical-type",
       "tier": "LMD-Core",
-      "description": "Legacy type is normalized as @type.",
-      "input": "cases/legacy-type-alias/input.md",
+      "description": "Canonical @type keyword in frontmatter.",
+      "input": "cases/canonical-type/input.md",
       "expect": {
-        "parsed": "cases/legacy-type-alias/expected.json",
-        "rdf": "cases/legacy-type-alias/expected.nt"
+        "parsed": "cases/canonical-type/expected.json",
+        "rdf": "cases/canonical-type/expected.nt"
       },
-      "tags": ["frontmatter", "legacy", "type"]
+      "tags": ["frontmatter", "type"]
     },
     {
       "id": "body-links",

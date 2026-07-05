@@ -1,5 +1,5 @@
 ---
-id: https://wazootech.github.io/linked-markdown/conformance/
+"@id": https://wazootech.github.io/linked-markdown/conformance/
 "@type": lmd:ConformanceSuite
 lmd:version: 0.1.0
 "@context":
@@ -16,7 +16,7 @@ Implementation repositories should consume this suite and provide a thin native 
 
 - Compare normalized parsed JSON, not implementation-specific objects.
 - Compare RDF as sorted N-Triples for cases without blank nodes.
-- Assert stable error codes, not exact human-facing error messages.
+- Assert stable error codes for error cases, not exact human-facing error messages.
 - Treat file paths in `manifest.json` as relative to this `conformance/` directory.
 
 ## Suggested CLI Contract

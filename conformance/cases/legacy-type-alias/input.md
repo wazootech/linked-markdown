@@ -1,9 +1,0 @@
----
-"@id": https://example.org/docs/legacy-type
-"@type": schema:Note
-"@context":
-  schema: https://schema.org/
-schema:name: Legacy Type Alias
----
-
-Legacy `type` is accepted as an alias for `@type`.
