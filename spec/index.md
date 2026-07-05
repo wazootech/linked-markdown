@@ -1,5 +1,5 @@
 ---
-id: https://wazootech.github.io/linked-markdown/spec/
+"@id": https://wazootech.github.io/linked-markdown/spec/
 "@type": lmd:Specification
 lmd:version: 0.1.0
 lmd:status: Draft
@@ -43,7 +43,7 @@ LMD defines a protocol over standard `.md` files. An LMD document is simultaneou
 
 - **Valid Markdown** — renderable by any CommonMark-compliant renderer, including GitHub, Obsidian, VS Code, and Pandoc.
 - **Valid JSON-LD** — frontmatter is a valid JSON-LD node, loadable by any RDF toolchain including `rdflib`, Apache Jena, and Oxigraph.
-- **Incrementally adoptable** — a single file with a `type` field and an `id` field is an LMD document. The protocol adds capability without breaking existing workflows.
+- **Incrementally adoptable** — a single file with an `@id` field and an `@type` field is an LMD document. The protocol adds capability without breaking existing workflows.
 
 No custom syntax is introduced. No new file extension is required. The protocol lives entirely in the frontmatter, the linking conventions, and the validation shapes applied by conforming processors.
 
@@ -96,16 +96,16 @@ A document conforms to LMD if and only if:
 1. It is a syntactically valid Markdown document per the CommonMark specification.
 2. It contains exactly one JSON-LD frontmatter block delimited by `---` at the start of the file.
 3. The frontmatter block is valid JSON-LD per [JSON-LD 1.1](https://www.w3.org/TR/json-ld11/).
-4. The frontmatter block includes an `id` field whose value is an absolute IRI.
-5. The frontmatter block includes a `@type` field (or the legacy `type` alias).
+4. The frontmatter block includes an `@id` field whose value is an absolute IRI.
+5. The frontmatter block includes a `@type` field.
 
 The minimum viable LMD document:
 
 ```markdown
 ---
-id: https://example.org/docs/my-item
-@type: schema:Article
-@context:
+"@id": https://example.org/docs/my-item
+"@type": schema:Article
+"@context":
   schema: https://schema.org/
 ---
 
@@ -119,7 +119,7 @@ A processor MUST NOT reject a conforming LMD document for lacking optional field
 
 A processor conforms to LMD if it implements at least one of the following capability tiers at the required conformance level:
 
-- **LMD-Core** — Must parse frontmatter as JSON-LD, resolve `id` and `@type`, and produce an RDF 1.1 graph.
+- **LMD-Core** — Must parse frontmatter as JSON-LD, resolve `@id` and `@type`, and produce an RDF 1.1 graph.
 - **LMD-Validation** — Must implement SHACL validation per [SHACL 1.1](https://www.w3.org/TR/shacl/).
 - **LMD-Query** — Must implement SPARQL 1.1 query execution against the LMD graph.
 - **LMD-Publish** — Must produce static HTML output consistent with the LMD document's semantic content.
@@ -134,17 +134,17 @@ A SHACL shapes graph conforms to LMD if it is valid SHACL per the W3C SHACL spec
 
 ### 3.1. Document Identity
 
-Every LMD document has a canonical IRI in its `id` (or `@id`) field. This IRI is the document's identity within the LMD corpus and serves as the RDF subject for all triples generated from the document's frontmatter.
+Every LMD document has a canonical IRI in its `@id` field. This IRI is the document's identity within the LMD corpus and serves as the RDF subject for all triples generated from the document's frontmatter.
 
-The `id` SHOULD be a dereferenceable HTTP(S) IRI. The `id` MAY be a URN or tag URI for documents that are not publicly hosted.
+The `@id` SHOULD be a dereferenceable HTTP(S) IRI. The `@id` MAY be a URN or tag URI for documents that are not publicly hosted.
 
 ```yaml
-id: https://example.org/docs/people/alice-smith
+"@id": https://example.org/docs/people/alice-smith
 ```
 
 ### 3.2. Document Type
 
-Every LMD document declares its semantic type via `@type` (or the legacy `type` alias). The value MUST be one or more IRI references, which may use CURIE notation when a `@context` is present.
+Every LMD document declares its semantic type via `@type`. The value MUST be one or more IRI references, which may use CURIE notation when a `@context` is present.
 
 ```yaml
 @type:
@@ -212,9 +212,9 @@ YAML syntax is also conforming:
 
 ```yaml
 ---
-id: https://example.org/doc
-@type: schema:Article
-@context:
+"@id": https://example.org/doc
+"@type": schema:Article
+"@context":
   schema: https://schema.org/
 name: Example Document
 ---
@@ -224,8 +224,8 @@ name: Example Document
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `id` or `@id` | IRI | Canonical identifier for the document |
-| `type` or `@type` | IRI or IRI[] | RDF type(s) of the document |
+| `@id` | IRI | Canonical identifier for the document |
+| `@type` | IRI or IRI[] | RDF type(s) of the document |
 
 ### 4.3. Recommended Fields
 
@@ -243,13 +243,13 @@ When a `@context` is present, all CURIEs (e.g., `schema:Person`) in the frontmat
 
 ### 4.5. Relation to RDF
 
-Each frontmatter field that is not a JSON-LD keyword (`@id`, `@type`, `@context`) is mapped to an RDF predicate-value pair with the document's `id` as the subject. Arrays become multiple triples with the same subject-predicate. Nested objects (when supported by the processor) become blank nodes or named nodes per JSON-LD 1.1 framing rules.
+Each frontmatter field that is not a JSON-LD keyword (`@id`, `@type`, `@context`) is mapped to an RDF predicate-value pair with the document's `@id` as the subject. Arrays become multiple triples with the same subject-predicate. Nested objects (when supported by the processor) become blank nodes or named nodes per JSON-LD 1.1 framing rules.
 
 ## 5. Document Linking
 
 ### 5.1. Intra-Corpus Links
 
-Links between LMD documents in the same corpus are expressed through Markdown links whose target is another LMD document's filename or IRI. When the target document exists in the corpus, the link is resolved to that document's `id` IRI.
+Links between LMD documents in the same corpus are expressed through Markdown links whose target is another LMD document's filename or IRI. When the target document exists in the corpus, the link is resolved to that document's `@id` IRI.
 
 ```markdown
 See [Alice Smith](Alice_Smith.md) for details.
@@ -304,8 +304,8 @@ Inference enables subclass reasoning, property chain expansion, and domain/range
 ```yaml
 # document.md
 ---
-id: wiki:alice-smith
-@type: wiki:Engineer
+"@id": wiki:alice-smith
+"@type": wiki:Engineer
 ---
 ```
 
@@ -408,7 +408,7 @@ Process stamps SHOULD align with the W3C PROV-O ontology:
 
 ### 12.1. IRI Injection
 
-IRIs in `id`, `@id`, and link targets MUST be validated to prevent injection of unexpected schemes (e.g., `javascript:`, `data:`). A processor SHOULD reject IRIs with non-http schemes in publishing and query contexts.
+IRIs in `@id` and link targets MUST be validated to prevent injection of unexpected schemes (e.g., `javascript:`, `data:`). A processor SHOULD reject IRIs with non-http schemes in publishing and query contexts.
 
 ### 12.2. Schema Loading
 
@@ -432,8 +432,8 @@ These considerations are deferred until the protocol reaches stability at versio
 
 ```markdown
 ---
-id: https://example.org/docs/people/alice-smith
-@type:
+"@id": https://example.org/docs/people/alice-smith
+"@type":
   - schema:Person
   - lmd:Document
 @context:

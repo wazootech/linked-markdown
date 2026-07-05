@@ -1,5 +1,5 @@
 ---
-id: https://example.org/docs/links
+"@id": https://example.org/docs/links
 "@type": schema:Article
 "@context":
   schema: https://schema.org/

@@ -1,5 +1,5 @@
 ---
-id: https://example.org/docs/missing-type
+"@id": https://example.org/docs/missing-type
 "@context":
   schema: https://schema.org/
 ---
