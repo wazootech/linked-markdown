@@ -293,24 +293,7 @@ LMD is the Worlds-aligned specification for defining item types, shapes, and orc
 4. **Standard RDF foundation.** LMD does not invent a new data model. It maps directly onto RDF 1.1, JSON-LD 1.1, SHACL, OWL-RL, and SPARQL 1.1.
 5. **Deterministic structure.** Two conforming processors that validate the same corpus against the same shapes produce the same results.
 
-### 1.2. Table of Contents
-
-- [Introduction](#1-introduction)
-  - [Design Goals](#11-design-goals)
-  - [Prior Art and Related Work](#13-prior-art-and-related-work)
-  - [Protocol Status and Versioning](#14-protocol-status-and-versioning)
-- [Conformance](#2-conformance)
-- [The LMD Document Model](#3-the-lmd-document-model)
-- [Frontmatter as JSON-LD](#4-frontmatter-as-json-ld)
-- [Document Linking](#5-document-linking)
-- [Validation](#6-validation)
-- [Inference](#7-inference)
-- [Query](#8-query)
-- [Serialization](#9-serialization)
-- [Publishing](#10-publishing)
-- [Provenance](#11-provenance)
-- [Security Considerations](#12-security-considerations)
-- [IANA Considerations](#13-iana-considerations)
+<!-- TOC omitted in paper context; the paper's own TOC covers the document structure -->
 
 ### 1.3. Prior Art and Related Work
 
