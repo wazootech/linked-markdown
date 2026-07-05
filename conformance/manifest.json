@@ -39,7 +39,7 @@
     {
       "id": "body-links",
       "tier": "LMD-Core",
-      "description": "Markdown and wikilinks are extracted from body text.",
+      "description": "Links in the body are not included in the core parse output. The parsed node contains only frontmatter properties.",
       "input": "cases/body-links/input.md",
       "expect": {
         "parsed": "cases/body-links/expected.json",
