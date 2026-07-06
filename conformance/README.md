@@ -10,7 +10,7 @@ lmd:version: 0.1.0
 
 This directory contains the canonical language-agnostic conformance fixtures for Linked Markdown processors.
 
-## Case Structure
+## Case structure
 
 Each case is a subdirectory of `cases/<case-id>/` containing:
 
@@ -22,7 +22,7 @@ Each case is a subdirectory of `cases/<case-id>/` containing:
 
 Error cases omit `expected.json`/`extracted.json` and instead have an entry in `manifest.json` under `expect.error.code`.
 
-## Conformance Tiers
+## Conformance tiers
 
 | Tier | Covers | Tests |
 |------|--------|-------|
@@ -39,9 +39,9 @@ A processor that passes all LMD-Parse cases is a conforming Linked Markdown pars
 - Treat file paths in `manifest.json` as relative to this `conformance/` directory.
 - An `expect.error.code` entry indicates the case MUST throw the named `LinkedMarkdownError` code.
 
-## Valid Cases
+## Valid cases
 
-### Delimiter Matrix (9 cases)
+### Delimiter matrix (9 cases)
 
 Each valid format-delimiter combination has an `input.md` that establishes `@id`, `@type`, `@context`, and `schema:name` in the appropriate syntax.
 
@@ -57,7 +57,7 @@ Each valid format-delimiter combination has an `input.md` that establishes `@id`
 | `valid-toml-plus` | `+++` | `+++` | TOML |
 | `valid-toml-equals` | `= toml =` | `= toml =` | TOML |
 
-### Edge Cases (6 cases)
+### Edge cases (6 cases)
 
 | Case | Description |
 |------|-------------|
@@ -69,14 +69,14 @@ Each valid format-delimiter combination has an `input.md` that establishes `@id`
 | `bare-keywords-preserved` | Bare keywords `id`, `type`, `context` (no `@` prefix) are parsed as regular properties |
 | `body-delimiter-ignored-by-parse` | Triple dashes in the body are not mistaken for a frontmatter delimiter |
 
-### Encoding Cases (2 cases)
+### Encoding cases (2 cases)
 
 | Case | Description |
 |------|-------------|
 | `crlf-line-endings` | Frontmatter with CRLF line endings is normalized before parsing |
 | `utf8-bom` | UTF-8 BOM at start of file is stripped before frontmatter parsing |
 
-## Error Cases (8 cases)
+## Error cases (8 cases)
 
 Each error case MUST throw a `LinkedMarkdownError` with the specified error code.
 
@@ -91,7 +91,7 @@ Each error case MUST throw a `LinkedMarkdownError` with the specified error code
 | `invalid-mismatched-delimiter` | `LMD_INVALID_FRONTMATTER` | Marker hints JSON but content is YAML |
 | `invalid-no-closing-delimiter` | `LMD_INVALID_FRONTMATTER` | Opener exists but no closing delimiter found |
 
-## Adding a Case
+## Adding a case
 
 1. Create `cases/<case-id>/input.md` with the Linked Markdown content.
 2. For valid cases, create `expected.json` with the expected `attrs` output.
@@ -106,7 +106,7 @@ Each error case MUST throw a `LinkedMarkdownError` with the specified error code
    uv run pytest
    ```
 
-## Reference Implementations
+## Reference implementations
 
-- **[TypeScript](https://github.com/wazootech/linked-markdown-ts)** — `@wazoo/linked-markdown` on JSR
-- **[Python](https://github.com/wazootech/linked-markdown-py)** — `linked-markdown-py` on PyPI
+- [**TypeScript**](https://github.com/wazootech/linked-markdown-ts) — `@wazoo/linked-markdown` on JSR
+- [**Python**](https://github.com/wazootech/linked-markdown-py) — `linked-markdown-py` on PyPI
