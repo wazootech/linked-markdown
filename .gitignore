@@ -1,3 +1,4 @@
 *.pdf
+!paper/paper.pdf
 *.tex
 .DS_Store
