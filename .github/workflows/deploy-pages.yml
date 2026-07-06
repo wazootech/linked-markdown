@@ -19,6 +19,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: actions/configure-pages@v5
+
       - name: Install pandoc
         run: sudo apt-get update && sudo apt-get install -y pandoc
 
