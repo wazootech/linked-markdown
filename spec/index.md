@@ -21,7 +21,7 @@ lmd:supersedes: https://wazootech.github.io/wiki/
 
 # Linked Markdown (LMD)
 
-**Specification Version 0.1.0 — Draft**
+**Specification Version 0.1.0 -- Draft**
 
 **Repository:** [github.com/wazootech/linked-markdown](https://github.com/wazootech/linked-markdown)
 **Reference Implementations:**
@@ -43,9 +43,9 @@ Linked Markdown (LMD) is a specification for structuring, validating, and queryi
 
 LMD defines a protocol over standard `.md` files. An LMD document is simultaneously:
 
-- **Valid Markdown** — renderable by any CommonMark-compliant renderer, including GitHub, Obsidian, VS Code, and Pandoc.
-- **Valid JSON-LD** — frontmatter is a valid JSON-LD node, loadable by any RDF toolchain including `rdflib`, Apache Jena, and Oxigraph.
-- **Incrementally adoptable** — a single file with an `@id` field and an `@type` field is an LMD document. The protocol adds capability without breaking existing workflows.
+- **Valid Markdown** -- renderable by any CommonMark-compliant renderer, including GitHub, Obsidian, VS Code, and Pandoc.
+- **Valid JSON-LD** -- frontmatter is a valid JSON-LD node, loadable by any RDF toolchain including `rdflib`, Apache Jena, and Oxigraph.
+- **Incrementally adoptable** -- a single file with an `@id` field and an `@type` field is an LMD document. The protocol adds capability without breaking existing workflows.
 
 No custom syntax is introduced. No new file extension is required. The protocol lives entirely in the frontmatter, the linking conventions, and the validation shapes applied by conforming processors.
 
@@ -55,7 +55,7 @@ LMD is the Worlds-aligned specification for defining item types, shapes, and orc
 
 1. **Zero custom syntax.** LMD adds no nonstandard Markdown syntax. All protocol semantics are expressed through standard JSON-LD frontmatter and standard Markdown links.
 2. **Valid by default.** A vanilla `.md` file with JSON-LD frontmatter is valid LMD. The protocol does not require any special Markdown dialect.
-3. **Layered capability.** A processor may validate, query, link-check, or publish — each capability is independent and optional at the processor level.
+3. **Layered capability.** A processor may validate, query, link-check, or publish -- each capability is independent and optional at the processor level.
 4. **Standard RDF foundation.** LMD does not invent a new data model. It maps directly onto RDF 1.1, JSON-LD 1.1, SHACL, OWL-RL, and SPARQL 1.1.
 5. **Deterministic structure.** Two conforming processors that validate the same corpus against the same shapes produce the same results.
 
@@ -80,10 +80,10 @@ LMD is the Worlds-aligned specification for defining item types, shapes, and orc
 
 ### 1.3. Prior Art and Related Work
 
-- **DataBooks (Cagle, Shannon, 2026)** — A design pattern for Markdown as semantic infrastructure. LMD adopts the DataBooks vision but diverges by requiring JSON-LD frontmatter (not YAML) and zero custom inline syntax.
-- **Markdown-LD (ozekik, 2023)** — A literate programming approach to embedding Turtle in Markdown body text using inline RDF syntax. Complementary to LMD; LMD addresses document-level typing and validation rather than inline triple annotation.
-- **MD-LD (davay42, 2026)** — A zero-dependency JavaScript library for inline RDF annotations in Markdown using `{=iri}` syntax. The nonstandard annotation syntax can cause unpredictable rendering. LMD avoids this entirely by restricting protocol semantics to frontmatter.
-- **json-ld-markdown (iunera, 2025)** — A transformer that infers Schema.org JSON-LD from plain Markdown structure (headings, tables, lists). Addresses a different concern (SEO/consumption-oriented inference vs. LMD's author-intent typing).
+- **DataBooks (Cagle, Shannon, 2026)** -- A design pattern for Markdown as semantic infrastructure. LMD adopts the DataBooks vision but diverges by requiring JSON-LD frontmatter (not YAML) and zero custom inline syntax.
+- **Markdown-LD (ozekik, 2023)** -- A literate programming approach to embedding Turtle in Markdown body text using inline RDF syntax. Complementary to LMD; LMD addresses document-level typing and validation rather than inline triple annotation.
+- **MD-LD (davay42, 2026)** -- A zero-dependency JavaScript library for inline RDF annotations in Markdown using `{=iri}` syntax. The nonstandard annotation syntax can cause unpredictable rendering. LMD avoids this entirely by restricting protocol semantics to frontmatter.
+- **json-ld-markdown (iunera, 2025)** -- A transformer that infers Schema.org JSON-LD from plain Markdown structure (headings, tables, lists). Addresses a different concern (SEO/consumption-oriented inference vs. LMD's author-intent typing).
 
 ### 1.4. Protocol Status and Versioning
 
@@ -114,10 +114,10 @@ A processor MUST NOT reject a conforming LMD document for lacking optional field
 
 A processor conforms to LMD if it implements at least one of the following capability tiers at the required conformance level:
 
-- **LMD-Core** — Must parse frontmatter as JSON-LD and produce an RDF 1.1 graph.
-- **LMD-Validation** — Must implement SHACL validation per [SHACL 1.1](https://www.w3.org/TR/shacl/).
-- **LMD-Query** — Must implement SPARQL 1.1 query execution against the LMD graph.
-- **LMD-Publish** — Must produce static HTML output consistent with the LMD document's semantic content.
+- **LMD-Core** -- Must parse frontmatter as JSON-LD and produce an RDF 1.1 graph.
+- **LMD-Validation** -- Must implement SHACL validation per [SHACL 1.1](https://www.w3.org/TR/shacl/).
+- **LMD-Query** -- Must implement SPARQL 1.1 query execution against the LMD graph.
+- **LMD-Publish** -- Must produce static HTML output consistent with the LMD document's semantic content.
 
 Tier identifiers are used for capability discovery. A processor may advertise: `Conforms-To: LMD-Core, LMD-Validation`.
 
@@ -163,7 +163,7 @@ Processors SHOULD provide a default context that includes commonly used prefixes
 
 ### 3.4. Vocabulary Conventions
 
-The `lmd:` prefix defines terms specific to the LMD protocol layer — document types, versioning, validation metadata, and provenance stamps. These terms describe a document's relationship to the LMD protocol rather than its subject matter.
+The `lmd:` prefix defines terms specific to the LMD protocol layer -- document types, versioning, validation metadata, and provenance stamps. These terms describe a document's relationship to the LMD protocol rather than its subject matter.
 
 For subject-matter and general-purpose metadata, documents SHOULD use established vocabularies such as Schema.org (`schema:`), Dublin Core (`dcterms:`), FOAF (`foaf:`), or PROV-O (`prov:`). A document that uses only standard vocabularies without any `lmd:`-prefixed properties is a valid LMD document. LMD does not replace existing vocabularies; it provides a Markdown-compatible substrate in which they coexist.
 
@@ -519,12 +519,12 @@ The `lmd:` prefix expands to `https://wazootech.github.io/linked-markdown/ns#`. 
 
 ## Appendix D: References
 
-- [CommonMark Spec](https://spec.commonmark.org/) — Standard Markdown syntax
-- [JSON-LD 1.1](https://www.w3.org/TR/json-ld11/) — JSON-based RDF serialization
-- [RDF 1.1](https://www.w3.org/TR/rdf11-concepts/) — RDF data model
-- [SHACL 1.1](https://www.w3.org/TR/shacl/) — Shapes Constraint Language
-- [OWL 2 RL](https://www.w3.org/TR/owl2-profiles/) — OWL 2 RL profile
-- [SPARQL 1.1](https://www.w3.org/TR/sparql11-query/) — SPARQL query language
-- [PROV-O](https://www.w3.org/TR/prov-o/) — Provenance ontology
-- [RFC 4151](https://www.rfc-editor.org/rfc/rfc4151) — The 'tag' URI scheme
-- [DataBooks: Markdown as Semantic Infrastructure](https://ontologist.substack.com/p/databooks-markdown-as-semantic-infrastructure) — Cagle, Shannon 2026
+- [CommonMark Spec](https://spec.commonmark.org/) -- Standard Markdown syntax
+- [JSON-LD 1.1](https://www.w3.org/TR/json-ld11/) -- JSON-based RDF serialization
+- [RDF 1.1](https://www.w3.org/TR/rdf11-concepts/) -- RDF data model
+- [SHACL 1.1](https://www.w3.org/TR/shacl/) -- Shapes Constraint Language
+- [OWL 2 RL](https://www.w3.org/TR/owl2-profiles/) -- OWL 2 RL profile
+- [SPARQL 1.1](https://www.w3.org/TR/sparql11-query/) -- SPARQL query language
+- [PROV-O](https://www.w3.org/TR/prov-o/) -- Provenance ontology
+- [RFC 4151](https://www.rfc-editor.org/rfc/rfc4151) -- The 'tag' URI scheme
+- [DataBooks: Markdown as Semantic Infrastructure](https://ontologist.substack.com/p/databooks-markdown-as-semantic-infrastructure) -- Cagle, Shannon 2026
