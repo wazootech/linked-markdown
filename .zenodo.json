@@ -2,12 +2,15 @@
   "title": "LMD: Linked Markdown — Markdown as Semantic Infrastructure",
   "creators": [
     {
-      "name": "Ethan Davidson",
-      "affiliation": "Wazoo",
-      "orcid": ""
+      "name": "Davidson, Ethan",
+      "affiliation": "Wazoo Technologies"
     }
   ],
   "description": "LMD (Linked Markdown) is a specification for structuring, validating, and querying typed Markdown documents as first-class semantic graph nodes. An LMD document is simultaneously valid CommonMark and valid JSON-LD — rendering in any standard Markdown renderer while participating in an RDF graph with SHACL validation, OWL-RL inference, and SPARQL query capability. No custom syntax is introduced; the protocol lives entirely in frontmatter and linking conventions. This paper presents LMD's design, compares it with related approaches, and describes the TypeScript and Python reference implementations. The full specification is included as an appendix.",
+  "upload_type": "publication",
+  "publication_type": "technicalreport",
+  "access_right": "open",
+  "license": "cc-by-4.0",
   "keywords": [
     "Linked Markdown",
     "JSON-LD",
@@ -16,13 +19,5 @@
     "Markdown",
     "SHACL",
     "SPARQL"
-  ],
-  "license": "cc-by-4.0",
-  "upload_type": "publication",
-  "publication_type": "technicalreport",
-  "access_right": "open",
-  "prereserve_doi": false,
-  "communities": [
-    { "identifier": "json-ld" }
   ]
 }
