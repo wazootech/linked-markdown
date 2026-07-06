@@ -9,6 +9,7 @@
   "description": "LMD (Linked Markdown) is a specification for structuring, validating, and querying typed Markdown documents as first-class semantic graph nodes. An LMD document is simultaneously valid CommonMark and valid JSON-LD — rendering in any standard Markdown renderer while participating in an RDF graph with SHACL validation, OWL-RL inference, and SPARQL query capability. No custom syntax is introduced; the protocol lives entirely in frontmatter and linking conventions. This paper presents LMD's design, compares it with related approaches, and describes the TypeScript and Python reference implementations. The full specification is included as an appendix.",
   "upload_type": "publication",
   "publication_type": "technicalreport",
+  "doi": "10.5281/zenodo.21216085",
   "access_right": "open",
   "license": "cc-by-4.0",
   "keywords": [

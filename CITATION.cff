@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "If you use Linked Markdown in your work, please cite this paper."
+title: "LMD: Linked Markdown — Markdown as Semantic Infrastructure"
+authors:
+  - family-names: Davidson
+    given-names: Ethan
+    orcid: "https://orcid.org/0009-0005-3059-852X"
+    affiliation: "Wazoo Technologies"
+doi: 10.5281/zenodo.21216085
+date-released: 2026-07-06
+version: v1
+license: CC-BY-4.0
+type: report

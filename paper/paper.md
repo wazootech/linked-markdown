@@ -11,6 +11,8 @@ arxiv:
     - cs.IR
   license: CC_BY_4_0
   comments: "Full LMD specification included as Appendix A. 1 table."
+zenodo:
+  doi: 10.5281/zenodo.21216085
 bibliography: references.bib
 format:
   pdf:
@@ -749,3 +751,4 @@ The `lmd:` prefix expands to `https://wazootech.github.io/linked-markdown/ns#`. 
 *Specification: github.com/wazootech/linked-markdown*
 *TypeScript Implementation: github.com/wazootech/linked-markdown-ts*
 *Python Implementation: github.com/wazootech/linked-markdown-py*
+*DOI: [10.5281/zenodo.21216085](https://doi.org/10.5281/zenodo.21216085)*

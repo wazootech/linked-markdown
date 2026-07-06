@@ -3,6 +3,8 @@
 > **LMD: Linked Markdown — Markdown as Semantic Infrastructure**
 > Ethan Davidson · 2026
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21216085.svg)](https://doi.org/10.5281/zenodo.21216085)
+
 - [Full Paper (PDF)](paper.pdf)
 - [Full Paper (Markdown)](paper.md)
 - [Full Paper (HTML)](paper.html)
