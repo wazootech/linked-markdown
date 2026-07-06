@@ -6,4 +6,5 @@ A specification for structuring, validating, and querying typed Markdown documen
 - **[conformance/](./conformance/)** — Shared language-agnostic conformance test suite
 - **[paper/](./paper/)** — arXiv tech report: "LMD: Linked Markdown — Markdown as Semantic Infrastructure"
 - **[community/](./community/)** — W3C Community Group introduction materials
-- **[Reference implementation](https://github.com/wazootech/wiki)** — `wiki` CLI
+- **[Reference implementation (TypeScript)](https://github.com/wazootech/linked-markdown-ts)** — `@wazoo/linked-markdown` on JSR
+- **[Reference implementation (Python)](https://github.com/wazootech/linked-markdown-py)** — `linked-markdown-py` on PyPI
