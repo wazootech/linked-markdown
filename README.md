@@ -6,6 +6,47 @@
 
 A specification for structuring, validating, and querying typed Markdown documents as first-class semantic graph nodes.
 
+### Installation
+
+```sh
+# Python
+pip install linked-markdown
+```
+
+```sh
+# TypeScript (Deno)
+deno add jsr:@wazoo/linked-markdown
+
+# TypeScript (Node)
+npx jsr add @wazoo/linked-markdown
+```
+
+### RDF Compatibility
+
+The `attrs` returned by `extract()` is valid JSON-LD, directly loadable into the standard RDF library of your choice:
+
+**Python** — uses `rdflib`:
+
+```python
+import json
+import rdflib
+from linked_markdown import extract
+
+result = extract(markdown)
+g = rdflib.Graph()
+g.parse(data=json.dumps(result.attrs), format="json-ld")
+```
+
+**TypeScript** — uses `jsonld`:
+
+```ts
+import jsonld from "jsonld";
+import { extract } from "@wazoo/linked-markdown";
+
+const result = extract(markdown);
+const quads = await jsonld.toRDF(result.attrs);
+```
+
 - **[spec/](./spec/)** — The LMD specification (W3C JSON-LD CG work item)
 - **[conformance/](./conformance/)** — Shared language-agnostic conformance test suite
 - **[paper/](./paper/)** — arXiv tech report: "LMD: Linked Markdown — Markdown as Semantic Infrastructure"
