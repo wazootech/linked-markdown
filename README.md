@@ -7,6 +7,24 @@
 
 A specification for structuring, validating, and querying typed Markdown documents as first-class semantic graph nodes.
 
+```md
+---
+{
+  "@id": "https://example.org/docs/ethan-davidson",
+  "@type": "schema:Person",
+  "@context": {
+    "schema": "https://schema.org/"
+  },
+  "schema:givenName": "Ethan",
+  "schema:familyName": "Davidson"
+}
+---
+
+# Ethan Davidson
+
+Ethan Davidson is a [knowledge graph engineer](./roles/knowledge-graph-engineer.md).
+```
+
 - **[spec/](./spec/)** — The LMD specification (W3C JSON-LD CG work item)
 - **[conformance/](./conformance/)** — Shared language-agnostic conformance test suite
 - **[paper/](./paper/)** — "LMD: Linked Markdown — Markdown as Semantic Infrastructure" [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21216085.svg)](https://doi.org/10.5281/zenodo.21216085)
