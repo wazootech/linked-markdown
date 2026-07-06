@@ -54,7 +54,7 @@ jobs:
             pandoc "$f" -f markdown -t html -s \
               --metadata title="Linked Markdown Protocol" \
               -o "$out"
-          done < <(find . -name '*.md' -not -path './.github/*' -not -path './.git/*' -not -path './_site/*' -print0)
+          done < <(find . -name '*.md' -not -path './.github/*' -not -path './.git/*' -not -path './_site/*' -not -path './conformance/*' -print0)
 
           echo '<style>' > _style.html
           cat style.css >> _style.html
