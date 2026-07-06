@@ -54,7 +54,18 @@ jobs:
             pandoc "$f" -f markdown -t html -s \
               --metadata title="Linked Markdown Protocol" \
               -o "$out"
-          done < <(find . -name '*.md' -not -path './.github/*' -not -path './.git/*' -not -path './_site/*' -not -path './conformance/*' -print0)
+          done < <(find . -name '*.md' -not -path './.github/*' -not -path './.git/*' -not -path './_site/*' -not -path './conformance/cases/*' -print0)
+
+          # Copy raw source files alongside their directories for direct linking (paper.md, references.bib, etc.)
+          find . \( -name '*.pdf' -o -name '*.bib' -o -name '*.json' -o -name '*.md' \) \
+            -not -path './.github/*' -not -path './.git/*' -not -path './_site/*' \
+            -not -path './conformance/cases/*' -not -path './node_modules/*' \
+            -print0 | while IFS= read -r -d '' f; do
+            rel="${f#./}"
+            dir="$(dirname "$rel")"
+            mkdir -p "_site/$dir"
+            cp "$f" "_site/$rel"
+          done
 
           echo '<style>' > _style.html
           cat style.css >> _style.html
