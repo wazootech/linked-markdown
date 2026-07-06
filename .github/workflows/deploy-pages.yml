@@ -27,14 +27,35 @@ jobs:
       - name: Build HTML pages
         run: |
           mkdir -p _site
-          for f in $(find . -name '*.md' -not -path './.github/*' -not -path './.git/*' -not -path './conformance/*' -not -path './_site/*'); do
-            base=$(basename "$f" .md)
+          while IFS= read -r -d '' f; do
+            rel="${f#./}"
+            dir="$(dirname "$rel")"
+            base="$(basename "$rel" .md)"
+
+            if [ "$dir" = "." ]; then
+              if [ "$base" = "README" ]; then
+                pandoc "$f" -f markdown -t html -s \
+                  --metadata title="Linked Markdown Protocol" \
+                  -o "_site/index.html"
+              fi
+              continue
+            fi
+
+            mkdir -p "_site/$dir"
+
+            if [ "$base" = "index" ]; then
+              out="_site/$dir/index.html"
+            elif [ "$base" = "README" ] && [ ! -f "$dir/index.md" ]; then
+              out="_site/$dir/index.html"
+            else
+              out="_site/$dir/$base.html"
+            fi
+
             pandoc "$f" -f markdown -t html -s \
               --metadata title="Linked Markdown Protocol" \
-              -o "_site/$base.html"
-          done
+              -o "$out"
+          done < <(find . -name '*.md' -not -path './.github/*' -not -path './.git/*' -not -path './_site/*' -print0)
 
-          # Inject shared styles after pandoc's default CSS
           echo '<style>' > _style.html
           cat style.css >> _style.html
           echo '</style>' >> _style.html
