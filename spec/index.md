@@ -24,7 +24,9 @@ lmd:supersedes: https://wazootech.github.io/wiki/
 **Specification Version 0.1.0 — Draft**
 
 **Repository:** [github.com/wazootech/linked-markdown](https://github.com/wazootech/linked-markdown)
-**Canonical Reference Implementation:** [github.com/wazootech/wiki](https://github.com/wazootech/wiki) (package `wazootech-wiki`, CLI command `wiki`)
+**Reference Implementations:**
+- TypeScript: [`@wazoo/linked-markdown`](https://jsr.io/@wazoo/linked-markdown) on JSR ([github.com/wazootech/linked-markdown-ts](https://github.com/wazootech/linked-markdown-ts))
+- Python: [`linked-markdown`](https://pypi.org/project/linked-markdown/) on PyPI ([github.com/wazootech/linked-markdown-py](https://github.com/wazootech/linked-markdown-py))
 **License:** MIT
 
 ## Status of This Document

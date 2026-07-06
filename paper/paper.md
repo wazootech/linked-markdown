@@ -30,7 +30,7 @@ JSON-LD --- rendering in any standard Markdown renderer while participating
 in an RDF graph with SHACL validation, OWL-RL inference, and SPARQL query
 capability. No custom syntax is introduced; the protocol lives entirely in
 frontmatter and linking conventions. This paper presents LMD's design,
-compares it with related approaches [@cagle2026databooks; @ozekik2023markdownld; @davay422026mdld; @iunera2025jsonldmarkdown], and describes the `wiki` reference implementation.
+compares it with related approaches [@cagle2026databooks; @ozekik2023markdownld; @davay422026mdld; @iunera2025jsonldmarkdown], and describes the TypeScript and Python reference implementations.
 The full specification is included as an appendix.
 
 # Introduction
@@ -164,29 +164,34 @@ LMD differs from all prior work in three key ways:
 2. Validation and query are specified using W3C standards (SHACL, SPARQL)
 3. Capabilities are layered (Core, Validation, Query, Publish) and independently adoptable
 
-# Implementation: The wiki CLI
+# Implementations
 
-The canonical reference implementation of LMD is the **wiki** command-line
-tool (`github.com/wazootech/wiki`, package `wazootech-wiki`).
+LMD has two reference implementations, both available as standard library
+packages:
 
-The wiki CLI implements:
+## Python Implementation
 
-- **LMD-Core**: Parsing LMD documents from a filesystem corpus, resolving
-  `@id` and `@type`, producing an RDF 1.1 graph using `rdflib`.
-- **LMD-Validation**: SHACL validation against shapes in a `shapes/`
-  directory, using `pyshacl`.
-- **LMD-Query**: SPARQL 1.1 query execution via `rdflib`-embedded
-  SPARQL engine.
-- **LMD-Publish**: Static HTML site generation with content negotiation.
-- **Virtual Graph Derivation**: The filesystem directory structure is
-  treated as a virtual RDF graph, deriving document identity from file
-  paths relative to the corpus root.
+[**`linked-markdown`**](https://pypi.org/project/linked-markdown/) on PyPI
+([github.com/wazootech/linked-markdown-py](https://github.com/wazootech/linked-markdown-py))
 
-The CLI is implemented in Python and distributed via PyPI. Key
-architectural decisions include: zero required configuration beyond a
+An `extract()` function that parses LMD documents from a filesystem corpus,
+resolving `@id` and `@type`, producing a JSON-LD dictionary in `.attrs`.
+The resulting JSON-LD can be loaded directly into an `rdflib.Graph` for
+SHACL validation (via `pyshacl`) and SPARQL 1.1 query execution.
+
+Key architectural decisions include: zero required configuration beyond a
 corpus root; automatic shape and axiom discovery from convention-based
 directories; and strict separation of parsing, validation, query, and
-publish into independently invocable subcommands.
+publish into independently invocable CLI subcommands.
+
+## TypeScript Implementation
+
+[**`@wazoo/linked-markdown`**](https://jsr.io/@wazoo/linked-markdown) on JSR
+([github.com/wazootech/linked-markdown-ts](https://github.com/wazootech/linked-markdown-ts))
+
+An `extract()` function returning a JSON-LD document in `.attrs`, compatible
+with the `jsonld` npm package for RDF/JS quad production, SHACL validation,
+and SPARQL query execution. Available for Deno, Node, Bun, and browser via CDN.
 
 # Discussion
 
@@ -260,7 +265,9 @@ The full specification follows in Appendix A.
 **Specification Version 0.1.0 — Draft**
 
 **Repository:** [github.com/wazootech/linked-markdown](https://github.com/wazootech/linked-markdown)
-**Canonical Reference Implementation:** [github.com/wazootech/wiki](https://github.com/wazootech/wiki) (package `wazootech-wiki`, CLI command `wiki`)
+**Reference Implementations:**
+- TypeScript: [`@wazoo/linked-markdown`](https://jsr.io/@wazoo/linked-markdown) on JSR ([github.com/wazootech/linked-markdown-ts](https://github.com/wazootech/linked-markdown-ts))
+- Python: [`linked-markdown`](https://pypi.org/project/linked-markdown/) on PyPI ([github.com/wazootech/linked-markdown-py](https://github.com/wazootech/linked-markdown-py))
 **License:** MIT
 
 ## Status of This Document
@@ -740,4 +747,5 @@ The `lmd:` prefix expands to `https://wazootech.github.io/linked-markdown/ns#`. 
 
 *Repository: github.com/wazootech/linked-markdown-paper*
 *Specification: github.com/wazootech/linked-markdown*
-*Reference Implementation: github.com/wazootech/wiki*
+*TypeScript Implementation: github.com/wazootech/linked-markdown-ts*
+*Python Implementation: github.com/wazootech/linked-markdown-py*
