@@ -1,5 +1,5 @@
 ---
-"@id": https://wazootech.github.io/linked-markdown/spec/
+"@id": https://linked-markdown.wazoo.dev/spec/
 "@type": lmd:Specification
 lmd:version: 0.1.0
 lmd:status: Draft
@@ -8,7 +8,7 @@ lmd:license: MIT
 lmd:repository: https://github.com/wazootech/linked-markdown
 lmd:supersedes: https://wazootech.github.io/wiki/
 "@context":
-  lmd: https://wazootech.github.io/linked-markdown/ns#
+  lmd: https://linked-markdown.wazoo.dev/ns#
   schema: https://schema.org/
 ---
 
@@ -133,7 +133,7 @@ The context MUST include at minimum:
 ```yaml
 @context:
   schema: https://schema.org/
-  lmd: https://wazootech.github.io/linked-markdown/ns#
+  lmd: https://linked-markdown.wazoo.dev/ns#
 ```
 
 Processors SHOULD provide a default context that includes commonly used prefixes (`schema`, `lmd`, `rdf`, `rdfs`, `xsd`, `dc`, `dcterms`, `foaf`). A document may override any default prefix.
@@ -264,7 +264,7 @@ These considerations are deferred until the protocol reaches stability at versio
   - lmd:Document
 @context:
   schema: https://schema.org/
-  lmd: https://wazootech.github.io/linked-markdown/ns#
+  lmd: https://linked-markdown.wazoo.dev/ns#
   wiki: https://example.org/docs/
 name: Alice Smith
 description: Profile page for Alice Smith, software engineer.
@@ -293,7 +293,7 @@ Alice has been building semantic web applications since 2020.
 
 ## Appendix B: LMD namespace
 
-The `lmd:` prefix expands to `https://wazootech.github.io/linked-markdown/ns#`. The following terms are defined:
+The `lmd:` prefix expands to `https://linked-markdown.wazoo.dev/ns#`. The following terms are defined:
 
 | Term | Description |
 |------|-------------|

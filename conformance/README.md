@@ -1,9 +1,9 @@
 ---
-"@id": https://wazootech.github.io/linked-markdown/conformance/
+"@id": https://linked-markdown.wazoo.dev/conformance/
 "@type": lmd:ConformanceSuite
 lmd:version: 0.1.0
 "@context":
-  lmd: https://wazootech.github.io/linked-markdown/ns#
+  lmd: https://linked-markdown.wazoo.dev/ns#
 ---
 
 # Linked Markdown Conformance Suite

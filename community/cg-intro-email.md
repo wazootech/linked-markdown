@@ -10,7 +10,7 @@ Group. I'd like to introduce a work item I've been developing:
 validating, and querying typed Markdown documents as first-class semantic
 graph nodes, using JSON-LD frontmatter.
 
-https://wazootech.github.io/linked-markdown/spec/
+https://linked-markdown.wazoo.dev/spec/
 https://github.com/wazootech/linked-markdown
 
 The core idea: an LMD document is simultaneously valid CommonMark and valid

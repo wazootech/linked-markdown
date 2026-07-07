@@ -1,6 +1,6 @@
 ### New work item: Linked Markdown (LMD)
 
-**Spec:** https://wazootech.github.io/linked-markdown/spec/
+**Spec:** https://linked-markdown.wazoo.dev/spec/
 **Repo:** https://github.com/wazootech/linked-markdown
 **Proposed by:** Ethan Davidson (https://etok.me)
 
