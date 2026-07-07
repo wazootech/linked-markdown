@@ -7,6 +7,6 @@
 
 # Links
 
-See [the spec](../../spec/) and [[Local Note]].
+See [the spec](../../../spec/) and [[Local Note]].
 
 Ignore `[[Code Link]]` in code spans.
