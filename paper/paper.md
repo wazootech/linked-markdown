@@ -227,7 +227,7 @@ For existing Markdown corpora (Obsidian vaults, GitHub wikis, Jekyll
 sites), adoption can begin with a single frontmatter field and grow
 organically.
 
-# Future Work
+# Future work
 
 - **LMD Schema Registry**: A community-maintained registry of SHACL shapes
   for common document types (Person, Organization, Article, Book, etc.),
@@ -352,7 +352,7 @@ A processor conforms to LMD if it implements the LMD-Extract capability:
 
 - **LMD-Extract** -- Must parse frontmatter from a Linked Markdown document and return the extracted `frontMatter` string, `body` string, and `attrs` object (the parsed JSON-LD node). A processor MUST support all delimiter patterns listed in [§4.1](#41-syntax). A processor MUST reject malformed frontmatter with a descriptive error.
 
-## 3. The LMD Document Model
+## 3. The LMD document model
 
 ### 3.1. Document identity
 

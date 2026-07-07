@@ -22,7 +22,7 @@ lmd:supersedes: https://wazootech.github.io/wiki/
 - Python: [`linked-markdown`](https://pypi.org/project/linked-markdown/) on PyPI ([github.com/wazootech/linked-markdown-py](https://github.com/wazootech/linked-markdown-py))
 **License:** MIT
 
-## Status of This Document
+## Status of this document
 
 This document was published by the [JSON for Linked Data Community Group](https://www.w3.org/groups/cg/json-ld/). It is a draft Editor's Draft and may be updated, replaced, or made obsolete by other documents at any time. It is inappropriate to cite this document as other than work in progress.
 
@@ -42,7 +42,7 @@ LMD defines a protocol over standard `.md` files. An LMD document is simultaneou
 
 No custom syntax is introduced. No new file extension is required. The protocol lives entirely in the frontmatter and linking conventions.
 
-### 1.1. Design Goals
+### 1.1. Design goals
 
 1. **Zero custom syntax.** LMD adds no nonstandard Markdown syntax. All protocol semantics are expressed through standard JSON-LD frontmatter and standard Markdown links.
 2. **Valid by default.** A vanilla `.md` file with JSON-LD frontmatter is valid LMD. The protocol does not require any special Markdown dialect.
@@ -50,7 +50,7 @@ No custom syntax is introduced. No new file extension is required. The protocol 
 4. **Standard RDF foundation.** LMD does not invent a new data model. It maps directly onto RDF 1.1 and JSON-LD 1.1.
 5. **Deterministic structure.** Two conforming processors that process the same corpus produce the same results.
 
-### 1.2. Table of Contents
+### 1.2. Table of contents
 
 - [Introduction](#1-introduction)
   - [Design Goals](#11-design-goals)
@@ -64,20 +64,20 @@ No custom syntax is introduced. No new file extension is required. The protocol 
 - [Security Considerations](#7-security-considerations)
 - [IANA Considerations](#8-iana-considerations)
 
-### 1.3. Prior Art and Related Work
+### 1.3. Prior art and related work
 
 - **DataBooks (Cagle, Shannon, 2026)** -- A design pattern for Markdown as semantic infrastructure. LMD adopts the DataBooks vision but diverges by requiring JSON-LD frontmatter (not YAML) and zero custom inline syntax.
 - **Markdown-LD (ozekik, 2023)** -- A literate programming approach to embedding Turtle in Markdown body text using inline RDF syntax. Complementary to LMD; LMD addresses document-level typing and validation rather than inline triple annotation.
 - **MD-LD (davay42, 2026)** -- A zero-dependency JavaScript library for inline RDF annotations in Markdown using `{=iri}` syntax. The nonstandard annotation syntax can cause unpredictable rendering. LMD avoids this entirely by restricting protocol semantics to frontmatter.
 - **json-ld-markdown (iunera, 2025)** -- A transformer that infers Schema.org JSON-LD from plain Markdown structure (headings, tables, lists). Addresses a different concern (SEO/consumption-oriented inference vs. LMD's author-intent typing).
 
-### 1.4. Protocol Status and Versioning
+### 1.4. Protocol status and versioning
 
 This specification uses semantic versioning. Versions before 1.0.0 are drafts and may change incompatibly between minor versions. Once 1.0.0 is published, breaking changes require a major version bump.
 
 ## 2. Conformance
 
-### 2.1. Document Conformance
+### 2.1. Document conformance
 
 A document conforms to LMD if and only if:
 
@@ -96,15 +96,15 @@ Content here.
 
 A processor MUST NOT reject a conforming LMD document for lacking optional fields such as `@id`, `@type`, `@context`, `name`, or `description`.
 
-### 2.2. Processor Conformance
+### 2.2. Processor conformance
 
 A processor conforms to LMD if it implements the LMD-Extract capability:
 
 - **LMD-Extract** -- Must parse frontmatter from a Linked Markdown document and return the extracted `frontMatter` string, `body` string, and `attrs` object (the parsed JSON-LD node). A processor MUST support all delimiter patterns listed in [§4.1](#41-syntax). A processor MUST reject malformed frontmatter with a descriptive error.
 
-## 3. The LMD Document Model
+## 3. The LMD document model
 
-### 3.1. Document Identity
+### 3.1. Document identity
 
 An LMD document SHOULD declare a canonical IRI in its `@id` field. When present, this IRI is the document's identity within the LMD corpus and serves as the RDF subject for all triples generated from the document's frontmatter.
 
@@ -114,7 +114,7 @@ The `@id` SHOULD be a dereferenceable HTTP(S) IRI. The `@id` MAY be a URN or tag
 "@id": https://example.org/docs/people/alice-smith
 ```
 
-### 3.2. Document Type
+### 3.2. Document type
 
 An LMD document SHOULD declare its semantic type via `@type`. The value SHOULD be one or more IRI references, which may use CURIE notation when a `@context` is present.
 
@@ -124,7 +124,7 @@ An LMD document SHOULD declare its semantic type via `@type`. The value SHOULD b
   - lmd:Document
 ```
 
-### 3.3. The JSON-LD Context
+### 3.3. The JSON-LD context
 
 The `@context` field defines the prefix mappings for CURIE expansion within the frontmatter. A processor MUST resolve all CURIEs in the frontmatter against the active context before producing RDF.
 
@@ -138,7 +138,7 @@ The context MUST include at minimum:
 
 Processors SHOULD provide a default context that includes commonly used prefixes (`schema`, `lmd`, `rdf`, `rdfs`, `xsd`, `dc`, `dcterms`, `foaf`). A document may override any default prefix.
 
-### 3.4. Vocabulary Conventions
+### 3.4. Vocabulary conventions
 
 The `lmd:` prefix defines terms specific to the LMD protocol layer -- document types and versioning. These terms describe a document's relationship to the LMD protocol rather than its subject matter.
 
@@ -146,11 +146,11 @@ For subject-matter and general-purpose metadata, documents SHOULD use establishe
 
 A processor MAY define equivalence mappings between `lmd:` terms and terms in other vocabularies to improve interoperability with non-LMD RDF consumers. Such mappings are processor-specific and not required for conformance.
 
-### 3.5. Body Content
+### 3.5. Body content
 
 The Markdown body text (everything after the frontmatter) is part of the LMD document. An LMD-Extract processor returns the body as a `body` string alongside the parsed frontmatter. A processor MUST NOT require body content. An LMD document may consist only of frontmatter.
 
-### 3.6. Links as Properties
+### 3.6. Links as properties
 
 Body links are not processed as RDF properties in this version of the protocol. A processor MUST NOT generate triples from body Markdown links. Link semantics may be addressed in a future version of the specification.
 
@@ -214,7 +214,7 @@ name: Example Document
 
 A processor MUST NOT reject a conforming LMD document for lacking recommended fields.
 
-### 4.4. CURIE Resolution
+### 4.4. CURIE resolution
 
 When a `@context` is present, all CURIEs (e.g., `schema:Person`) in the frontmatter are expanded to full IRIs using the context's prefix map. A processor MUST reject a document containing unresolvable CURIEs when no matching prefix is defined.
 
@@ -222,13 +222,13 @@ When a `@context` is present, all CURIEs (e.g., `schema:Person`) in the frontmat
 
 Each frontmatter field that is not a JSON-LD keyword (`@id`, `@type`, `@context`) is mapped to an RDF predicate-value pair with the document's `@id` as the subject. Arrays become multiple triples with the same subject-predicate. Nested objects (when supported by the processor) become blank nodes or named nodes per JSON-LD 1.1 framing rules.
 
-## 5. Document Linking
+## 5. Document linking
 
 Document-level link resolution is not part of this version of the protocol. A future version may define how intra-corpus links between LMD documents are resolved, validated, and exposed as RDF references.
 
 ## 6. Serialization
 
-### 6.1. RDF Compatibility
+### 6.1. RDF compatibility
 
 The `attrs` object returned by an LMD-Extract processor is a valid JSON-LD node. Consumers may load it into any JSON-LD 1.1-compatible library to produce RDF 1.1 triples:
 
@@ -238,15 +238,15 @@ The `attrs` object returned by an LMD-Extract processor is a valid JSON-LD node.
 - [Apache Jena](https://jena.apache.org/) (Java)
 - [Oxigraph](https://oxigraph.org/) (Rust / Python)
 
-### 6.2. Context Preservation
+### 6.2. Context preservation
 
 When the frontmatter includes a `@context`, a processor MUST preserve it in the returned `attrs` object so that downstream consumers can perform correct CURIE expansion and JSON-LD framing.
 
-## 7. Security Considerations
+## 7. Security considerations
 
 IRIs in `@id` and link targets MUST be validated to prevent injection of unexpected schemes (e.g., `javascript:`, `data:`). A processor SHOULD reject IRIs with non-http schemes.
 
-## 8. IANA Considerations
+## 8. IANA considerations
 
 Linked Markdown does not currently require any IANA registrations. Future versions may request:
 - A media type registration (e.g., `text/lmd` or `application/lmd+json`)
@@ -254,9 +254,7 @@ Linked Markdown does not currently require any IANA registrations. Future versio
 
 These considerations are deferred until the protocol reaches stability at version 1.0.0.
 
----
-
-## Appendix A: Complete LMD Document Example
+## Appendix A: complete LMD document example
 
 ```markdown
 ---
@@ -293,9 +291,7 @@ Alice has been building semantic web applications since 2020.
 - See [Carol Davis](carol-davis.md) for another colleague
 ```
 
----
-
-## Appendix B: LMD Namespace
+## Appendix B: LMD namespace
 
 The `lmd:` prefix expands to `https://wazootech.github.io/linked-markdown/ns#`. The following terms are defined:
 
@@ -310,9 +306,6 @@ The `lmd:` prefix expands to `https://wazootech.github.io/linked-markdown/ns#`. 
 | `lmd:repository` | The document's canonical repository |
 | `lmd:supersedes` | An IRI this specification replaces |
 
-
----
-
 ## Appendix C: Glossary
 
 | Term | Definition |
@@ -322,8 +315,6 @@ The `lmd:` prefix expands to `https://wazootech.github.io/linked-markdown/ns#`. 
 | Document | A single `.md` file with LMD-conforming frontmatter |
 | Processor | Any tool or library implementing LMD-Extract |
 | Frontmatter | The JSON-LD metadata block at the start of an LMD document |
-
----
 
 ## Appendix D: References
 

@@ -1,12 +1,12 @@
 # Agent Guide for Linked Markdown
 
-## Style Guidelines
+## Style guidelines
 
 - **Rule:** Use ATX `#` headings only (no Setext underlines); wiki tooling does not index underlined headings for title, TOC, or fragment links.
 - **Rule:** Use title-case H1 headings (page title; align with `headline` frontmatter). Use sentence-case H2+ headings (capitalize only the first word and proper nouns). Avoid numbered headings; keep headings concise and clear.
 - **Rule:** Avoid using horizontal rules (`---`) for thematic breaks within page bodies.
 
-## Project Structure
+## Project structure
 
 - **`spec/`** — The LMD specification (W3C JSON-LD CG work item)
 - **`conformance/`** — Shared language-agnostic conformance test suite
