@@ -36,3 +36,12 @@ consumes the updated spec before landing it.
 The LMD spec defines a single processor tier: **LMD-Extract**. A conforming processor parses frontmatter from a Linked Markdown document and returns `{ frontMatter, body, attrs }`.
 
 See [spec/index.md](spec/index.md) for full details.
+
+## Code health
+
+Family-wide rules live in the [wazootech workspace constitution](https://github.com/wazootech/workspace/blob/main/AGENTS.md#code-health-standards); this repo's specifics:
+
+- This repo has no formatter or test suite; there is no one-command check. Verify spec changes through the implementation repos as described under Verification.
+- `.github/workflows/secret-scan.yml` runs gitleaks on every PR and push to `main`.
+- Actions in `.github/workflows/` (build and Pages deploy) are pinned to commit SHAs; `renovate.json` keeps them current.
+- `.github/CODEOWNERS` assigns `* @EthanThatOneKid`.
